@@ -19,8 +19,7 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "Observations on the Reachability and Evasion of Packets"
-abbrev: "with IPv6 Extension Headers on the Internet"
+title: "Observations on the Reachability and Evasion of Packets with IPv6 Extension Headers on the Internet"
 category: info
 
 docname: draft-zedongjia-v6ops-ipv6eh
@@ -388,7 +387,7 @@ sufficient time for responses. To mitigate the impact of ICMPv6 rate
 limiting and reduce the probing burden on target networks, we randomize the
 probing address list before each measurement round. Additionally, to
 minimize interference with both the local and target networks, we set the
-hop limits to [8, 30]. The probing rate is configured to 50,000 packets
+hop limits to 8--30. The probing rate is configured to 50,000 packets
 per second.
 
 ## Address Dataset {#dataset}
