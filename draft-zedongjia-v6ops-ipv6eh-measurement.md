@@ -27,7 +27,7 @@ author:
  -
     fullname: Lin He
     organization: Tsinghua University
-    email: helin1170@gmail.com
+    email: he-lin@tsinghua.edu.cn
  -
     fullname: Zedong Jia
     organization: Tsinghua University
