@@ -1,5 +1,4 @@
 ---
-
 title: "Observations on the Reachability and Evasion of Packets with IPv6 Extension Headers on the Internet"
 category: info
 
@@ -12,12 +11,11 @@ v: 3
 area: "Operations and Management"
 workgroup: "IPv6 Operations"
 keyword:
-
-- IPv6
-- IPv6 Extension Header
-- Reachability
-- Evasion
-  venue:
+ - IPv6
+ - IPv6 Extension Header
+ - Reachability
+ - Evasion
+venue:
   group: "IPv6 Operations"
   type: "Working Group"
   mail: "v6ops@ietf.org"
@@ -26,28 +24,23 @@ keyword:
   latest: "https://ZedongJia.github.io/draft-zedongjia-v6ops-ipv6eh-measurement/draft-zedongjia-v6ops-ipv6eh-measurement.html"
 
 author:
--------
-
-fullname: Lin He
+ -
+    fullname: Lin He
     organization: Tsinghua University
     email: he-lin@tsinghua.edu.cn
----------------------------------
-
-fullname: Zedong Jia
+ -
+    fullname: Zedong Jia
     organization: Tsinghua University
     email: jzd25@mails.tsinghua.edu.cn
---------------------------------------
-
-fullname: Le Gai
+ -
+    fullname: Le Gai
     organization: Tsinghua University
     email: gl25@mails.tsinghua.edu.cn
--------------------------------------
-
-fullname: Shenglin Zhang
+ -
+    fullname: Shenglin Zhang
     organization: Nankai University
     email: zhangsl@nankai.edu.cn
---------------------------------
-
+ -
     fullname: Ying Liu
     organization: Tsinghua University
     email: liuying@cernet.edu.cn
@@ -87,94 +80,93 @@ informative:
     target: https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml
   6Travel:
     title: "6Travel: A Feedback-Driven Framework for IPv6 Extension Header Path Traversal Measurement"
-
-| author:                                                                                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| fullname: Zedong Jia                                                                                                                                                     |
-| organization: Tsinghua University                                                                                                                                        |
-| date: 2026-01                                                                                                                                                            |
-| target: https://anonymous.4open.science/r/6Travel                                                                                                                        |
-| AddrProbe:                                                                                                                                                               |
-| title: "AddrProbe: An Internet-Wide Active IPv6 Address Probing System With Limited Seeds"                                                                               |
-| author:                                                                                                                                                                  |
-| -                                                                                                                                                                        |
-| fullname: Daguo Cheng                                                                                                                                                    |
-| date: 2026                                                                                                                                                               |
-| target: https://doi.org/10.1109/TON.2025.3645923                                                                                                                         |
-| IPv6-Observatory:                                                                                                                                                        |
-| title: "IPv6 Hitlists at Scale: Be Careful What You Wish For"                                                                                                            |
-| author:                                                                                                                                                                  |
-| -                                                                                                                                                                        |
-| fullname: Erik Rye                                                                                                                                                       |
-| -                                                                                                                                                                        |
-| fullname: Dave Levin                                                                                                                                                     |
-| date: 2023                                                                                                                                                               |
-| target: https://doi.org/10.1145/3603269.3604829                                                                                                                          |
-| ASdb:                                                                                                                                                                    |
-| title: "ASdb: a system for classifying owners of autonomous systems"                                                                                                     |
-| author:                                                                                                                                                                  |
-| -                                                                                                                                                                        |
-| fullname: Maya Ziv                                                                                                                                                       |
-| date: 2021                                                                                                                                                               |
-| target: https://doi.org/10.1145/3487552.3487853                                                                                                                          |
-| JAMES:                                                                                                                                                                   |
-| title: "Measuring IPv6 extension headers survivability with James"                                                                                                       |
-| author:                                                                                                                                                                  |
-| -                                                                                                                                                                        |
-| fullname: "Raphaël Léas"                                                                                                                                               |
-| -                                                                                                                                                                        |
-| fullname: Justin Iurman                                                                                                                                                  |
-| -                                                                                                                                                                        |
-| fullname: "Éric Vyncke"                                                                                                                                                 |
-| -                                                                                                                                                                        |
-| fullname: Benoit Donnet                                                                                                                                                  |
-| date: 2022                                                                                                                                                               |
-| target: https://doi.org/10.1145/3517745.3563019                                                                                                                          |
-| FishNet:                                                                                                                                                                 |
-| title: "The Razor's Edge: IPv6 Extension Headers Survivability"                                                                                                          |
-| author:                                                                                                                                                                  |
-| -                                                                                                                                                                        |
-| fullname: Justin Iurman                                                                                                                                                  |
-| -                                                                                                                                                                        |
-| fullname: Benoit Donnet                                                                                                                                                  |
-| date: 2025                                                                                                                                                               |
-| Huston-2022:                                                                                                                                                             |
-| title: "IPv6 Fragmentation and EH behaviours"                                                                                                                            |
-| author:                                                                                                                                                                  |
-| -                                                                                                                                                                        |
-| fullname: Geoff Huston                                                                                                                                                   |
-| -                                                                                                                                                                        |
-| fullname: Joao Damas                                                                                                                                                     |
-| date: 2022                                                                                                                                                               |
-| target: https://www.potaroo.net/presentations/2022-03-20-iepg-v6frag.pdf                                                                                                 |
-| Custura2024:                                                                                                                                                             |
-| title: "Is it possible to extend IPv6?"                                                                                                                                  |
-| author:                                                                                                                                                                  |
-| -                                                                                                                                                                        |
-| fullname: Ana Custura                                                                                                                                                    |
-| date: 2024                                                                                                                                                               |
-| target: https://doi.org/10.1016/j.comcom.2023.10.006                                                                                                                     |
-| IPv6-Vul:                                                                                                                                                                |
-| title: "Opening Pandora's Packet: Expose IPv6 Implementations Vulnerabilities Using Differential Fuzzing"                                                                |
-| author:                                                                                                                                                                  |
-| -                                                                                                                                                                        |
-| fullname: Enrico Bassetti                                                                                                                                                |
-| date: 2025                                                                                                                                                               |
-| target: https://doi.org/10.1007/978-3-031-95761-1_14                                                                                                                     |
-| Atlasis2016:                                                                                                                                                             |
-| title: "The Impact of Extension Headers on IPv6 Access Control Lists Real Life Use Cases"                                                                                |
-| author:                                                                                                                                                                  |
-| -                                                                                                                                                                        |
-| fullname: Antonios Atlasis                                                                                                                                               |
-| date: 2016                                                                                                                                                               |
-| target: https://troopers.de/media/filer_public/77/ad/77ad71b5-daea-441c-afb1-e14625ed11d0/tr16_aatlasis_the_impact_of_extension_headers_on_ipv6_access_control_lists.pdf |
-| FragEvasion:                                                                                                                                                             |
-| title: "Research on Security Protection Evasion Mechanism Based on IPv6 Fragment Headers"                                                                                |
-| author:                                                                                                                                                                  |
-| -                                                                                                                                                                        |
-| fullname: Bin Lin                                                                                                                                                        |
-| date: 2024                                                                                                                                                               |
-| target: https://doi.org/10.1109/LCN60385.2024.10639756                                                                                                                   |
+    author:
+      -
+        fullname: Zedong Jia
+        organization: Tsinghua University
+    date: 2026-01
+    target: https://anonymous.4open.science/r/6Travel
+  AddrProbe:
+    title: "AddrProbe: An Internet-Wide Active IPv6 Address Probing System With Limited Seeds"
+    author:
+      -
+        fullname: Daguo Cheng
+    date: 2026
+    target: https://doi.org/10.1109/TON.2025.3645923
+  IPv6-Observatory:
+    title: "IPv6 Hitlists at Scale: Be Careful What You Wish For"
+    author:
+      -
+        fullname: Erik Rye
+      -
+        fullname: Dave Levin
+    date: 2023
+    target: https://doi.org/10.1145/3603269.3604829
+  ASdb:
+    title: "ASdb: a system for classifying owners of autonomous systems"
+    author:
+      -
+        fullname: Maya Ziv
+    date: 2021
+    target: https://doi.org/10.1145/3487552.3487853
+  JAMES:
+    title: "Measuring IPv6 extension headers survivability with James"
+    author:
+      -
+        fullname: "Raphaël Léas"
+      -
+        fullname: Justin Iurman
+      -
+        fullname: "Éric Vyncke"
+      -
+        fullname: Benoit Donnet
+    date: 2022
+    target: https://doi.org/10.1145/3517745.3563019
+  FishNet:
+    title: "The Razor's Edge: IPv6 Extension Headers Survivability"
+    author:
+      -
+        fullname: Justin Iurman
+      -
+        fullname: Benoit Donnet
+    date: 2025
+  Huston-2022:
+    title: "IPv6 Fragmentation and EH behaviours"
+    author:
+      -
+        fullname: Geoff Huston
+      -
+        fullname: Joao Damas
+    date: 2022
+    target: https://www.potaroo.net/presentations/2022-03-20-iepg-v6frag.pdf
+  Custura2024:
+    title: "Is it possible to extend IPv6?"
+    author:
+      -
+        fullname: Ana Custura
+    date: 2024
+    target: https://doi.org/10.1016/j.comcom.2023.10.006
+  IPv6-Vul:
+    title: "Opening Pandora's Packet: Expose IPv6 Implementations Vulnerabilities Using Differential Fuzzing"
+    author:
+      -
+        fullname: Enrico Bassetti
+    date: 2025
+    target: https://doi.org/10.1007/978-3-031-95761-1_14
+  Atlasis2016:
+    title: "The Impact of Extension Headers on IPv6 Access Control Lists Real Life Use Cases"
+    author:
+      -
+        fullname: Antonios Atlasis
+    date: 2016
+    target: https://troopers.de/media/filer_public/77/ad/77ad71b5-daea-441c-afb1-e14625ed11d0/tr16_aatlasis_the_impact_of_extension_headers_on_ipv6_access_control_lists.pdf
+  FragEvasion:
+    title: "Research on Security Protection Evasion Mechanism Based on IPv6 Fragment Headers"
+    author:
+      -
+        fullname: Bin Lin
+    date: 2024
+    target: https://doi.org/10.1109/LCN60385.2024.10639756
 
 --- abstract
 
@@ -335,8 +327,8 @@ analysis.
 
 The framework incorporates a global and local rate control strategy to
 mitigate the impact of ICMPv6 rate limiting while maximizing probing
-efficiency. It also includes a packet marking mechanism and path-change
-validation to ensure measurement consistency.
+efficiency. It also includes a packet marking mechanism to ensure
+measurement consistency.
 
 6Travel is open-source and publicly available at
 [https://anonymous.4open.science/r/6Travel](https://anonymous.4open.science/r/6Travel).
@@ -362,13 +354,13 @@ To ensure a representative and large-scale perspective, target
 addresses are aggregated from three complementary sources, as detailed in
 {{tab-source}}.
 
-| Source                                               | Description                                             | # /48 Prefixes      | # ASes           | # Industry Categories |
-| ---------------------------------------------------- | ------------------------------------------------------- | ------------------- | ---------------- | --------------------- |
-| Source 1                                             | IPv6 Hitlist (responsive hosts across diverse networks) | 581,098             | 22,221           | 17                    |
-| Source 2                                             | AddrProbe (active target discovery for unseeded ASes)   | 1,485,873           | 2,158            | 17                    |
-| Source 3                                             | IPv6 Observatory (passive NTP traffic, prefix-level)    | 5,177,906           | 13,217           | 17                    |
-| **Total**                                      |                                                         | **6,336,433** | **23,999** | **17**          |
-| {: title="Details of three data sources"#tab-source} |                                                         |                     |                  |                       |
+| Source | Description | # /48 Prefixes | # ASes | # Industry Categories |
+|--------|-------------|-----------------|--------|----------------------|
+| Source 1 | IPv6 Hitlist (responsive hosts across diverse networks) | 581,098 | 22,221 | 17 |
+| Source 2 | AddrProbe (active target discovery for unseeded ASes) | 1,485,873 | 2,158 | 17 |
+| Source 3 | IPv6 Observatory (passive NTP traffic, prefix-level) | 5,177,906 | 13,217 | 17 |
+| **Total** | | **6,336,433** | **23,999** | **17** |
+{: title="Details of three data sources" #tab-source}
 
 Source 1 uses the IPv6 Hitlist as a broad baseline of responsive hosts.
 Source 2 leverages AddrProbe {{AddrProbe}}'s pattern-learning capabilities
@@ -391,20 +383,20 @@ transmission (AFrag, Frag), secure communication (AH, ESP), Mobile IPv6
 (RH2, MH), site multi-homing (HIP, Shim6), Routing header types
 (RH0, RH127), and general function extension (Dst).
 
-| EH                                     | Alias | Default Size (octets) | Description                                                  |
-| -------------------------------------- | ----- | --------------------- | ------------------------------------------------------------ |
-| Destination Options header             | Dst   | 8                     | The option is PadN.                                          |
-| Fragment header                        | Frag  | 8                     | The offset and M flag are set to zero and one, respectively. |
-| Atomic Fragment header                 | AFrag | 8                     | The offset and M flag are both set to zero.                  |
-| Routing header (type 0)                | RH0   | 8                     | The segments left field is set to zero.                      |
-| Routing header (type 2)                | RH2   | 24                    | The home address is set to the target address.               |
-| Routing header (type 127)              | RH127 | 8                     | The segments left field is set to zero.                      |
-| Authentication header                  | AH    | 24                    | All IPSec-related fields are filled with zeros.              |
-| Encapsulating Security Payload         | ESP   | -                     | All IPSec-related fields are filled with zeros.              |
-| Mobility header type 0                 | MH    | 8                     | All fields are set according to {{RFC6275}}.                 |
-| Host Identity Protocol header (type 1) | HIP   | 48                    | All fields are set according to {{RFC7401}}.                 |
-| Shim6 Protocol header                  | Shim6 | 8                     | All fields are set according to {{RFC5533}}.                 |
-| {: title="EHs measured"#tab-eh}        |       |                       |                                                              |
+| EH | Alias | Default Size (octets) | Description |
+|----|-------|-----------------------|-------------|
+| Destination Options header | Dst | 8 | The option is PadN. |
+| Fragment header | Frag | 8 | The offset and M flag are set to zero and one, respectively. |
+| Atomic Fragment header | AFrag | 8 | The offset and M flag are both set to zero. |
+| Routing header (type 0) | RH0 | 8 | The segments left field is set to zero. |
+| Routing header (type 2) | RH2 | 24 | The home address is set to the target address. |
+| Routing header (type 127) | RH127 | 8 | The segments left field is set to zero. |
+| Authentication header | AH | 24 | All IPSec-related fields are filled with zeros. |
+| Encapsulating Security Payload | ESP | - | All IPSec-related fields are filled with zeros. |
+| Mobility header type 0 | MH | 8 | All fields are set according to {{RFC6275}}. |
+| Host Identity Protocol header (type 1) | HIP | 48 | All fields are set according to {{RFC7401}}. |
+| Shim6 Protocol header | Shim6 | 8 | All fields are set according to {{RFC5533}}. |
+{: title="EHs measured" #tab-eh}
 
 For each EH, the probe is constructed by adding the EH between the IPv6
 base header and the upper-layer protocol header. The upper-layer protocols
@@ -421,17 +413,7 @@ traversal measurements as its limited reachability is already well-documented.
 # Observations on EH Path Traversal
 
 A comprehensive path traversal measurement was conducted across all
-combinations of EHs and upper-layer protocols. To ensure data quality,
-a filtering process is applied to identify and discard /48 prefixes
-exhibiting path changes during probing. {{tab-path-unchanged}} summarizes
-the filtered dataset.
-
-| Protocol                                                                                              | Unchanged /48 Prefixes | Rate   | # ASes |
-| ----------------------------------------------------------------------------------------------------- | ---------------------- | ------ | ------ |
-| ICMPv6                                                                                                | 6,020,231              | 95.13% | 23,572 |
-| TCP/22                                                                                                | 5,963,940              | 94.24% | 23,525 |
-| UDP/161                                                                                               | 5,824,972              | 92.04% | 23,509 |
-| {: title="Number of /48 prefixes with path unchanged observed in probing results"#tab-path-unchanged} |                        |        |        |
+combinations of EHs and upper-layer protocols.
 
 ## Destination AS Reachability
 
@@ -441,21 +423,21 @@ destination AS out of the total set of probed prefixes. The baseline
 represents EH-free probes per protocol. {{tab-path-traversal-overview}}
 presents the results for each EH across protocols.
 
-| EH                                                                                                                         | ICMPv6 (%) | TCP/22 (%) | UDP/161 (%) |
-| -------------------------------------------------------------------------------------------------------------------------- | ---------- | ---------- | ----------- |
-| Baseline                                                                                                                   | 80.18      | 70.55      | 69.58       |
-| Dst                                                                                                                        | 77.49      | 70.08      | 68.68       |
-| AFrag                                                                                                                      | 77.68      | 70.28      | 69.02       |
-| Frag                                                                                                                       | 63.00      | 61.86      | 61.40       |
-| RH0                                                                                                                        | 62.01      | 59.40      | 58.29       |
-| RH2                                                                                                                        | 65.56      | 58.80      | 58.26       |
-| RH127                                                                                                                      | 67.32      | 60.24      | 58.92       |
-| MH                                                                                                                         | 69.84      | 69.62      | 68.90       |
-| HIP                                                                                                                        | 70.96      | 70.87      | 67.80       |
-| Shim6                                                                                                                      | 70.18      | 70.00      | 69.54       |
-| AH                                                                                                                         | 72.27      | 70.56      | 69.76       |
-| ESP                                                                                                                        | 70.38      | 70.85      | 70.29       |
-| {: title="Destination AS reachability rate for each EH across protocols compared to baseline"#tab-path-traversal-overview} |            |            |             |
+| EH | ICMPv6 (%) | TCP/22 (%) | UDP/161 (%) |
+|----|-----------|-----------|------------|
+| Baseline | 80.18 | 70.55 | 69.58 |
+| Dst | 77.49 | 70.08 | 68.68 |
+| AFrag | 77.68 | 70.28 | 69.02 |
+| Frag | 63.00 | 61.86 | 61.40 |
+| RH0 | 62.01 | 59.40 | 58.29 |
+| RH2 | 65.56 | 58.80 | 58.26 |
+| RH127 | 67.32 | 60.24 | 58.92 |
+| MH | 69.84 | 69.62 | 68.90 |
+| HIP | 70.96 | 70.87 | 67.80 |
+| Shim6 | 70.18 | 70.00 | 69.54 |
+| AH | 72.27 | 70.56 | 69.76 |
+| ESP | 70.38 | 70.85 | 70.29 |
+{: title="Destination AS reachability rate for each EH across protocols compared to baseline" #tab-path-traversal-overview}
 
 The results indicate several patterns:
 
@@ -495,68 +477,68 @@ denote parity with the baseline, while values <1.0 and >1.0 indicate
 EH-induced filtering and potential evasion, respectively. A /48 prefix is
 counted multiple times if it belongs to multiple industry categories.
 
-| IC                                                                                             | Dst  | AFrag | Frag | RH0  | RH2  | RH127 | MH   | HIP  | Shim6 | AH   | ESP  |
-| ---------------------------------------------------------------------------------------------- | ---- | ----- | ---- | ---- | ---- | ----- | ---- | ---- | ----- | ---- | ---- |
-| Tech                                                                                           | 0.97 | 0.97  | 0.78 | 0.77 | 0.82 | 0.84  | 0.87 | 0.88 | 0.87  | 0.90 | 0.88 |
-| Other                                                                                          | 0.99 | 0.99  | 0.83 | 0.88 | 0.84 | 0.88  | 0.94 | 0.94 | 0.94  | 0.95 | 0.94 |
-| Retail                                                                                         | 0.98 | 0.78  | 0.69 | 0.82 | 0.77 | 0.83  | 0.75 | 0.74 | 0.75  | 0.92 | 0.74 |
-| Education                                                                                      | 0.97 | 0.93  | 0.58 | 0.86 | 0.78 | 0.89  | 0.78 | 0.82 | 0.82  | 0.80 | 0.76 |
-| Agriculture                                                                                    | 0.90 | 0.91  | 0.45 | 0.83 | 0.74 | 0.87  | 0.71 | 0.72 | 0.72  | 0.68 | 0.64 |
-| Manufacturing                                                                                  | 0.95 | 0.94  | 0.61 | 0.87 | 0.81 | 0.90  | 0.84 | 0.83 | 0.83  | 0.84 | 0.80 |
-| Utilities                                                                                      | 0.95 | 0.95  | 0.76 | 0.90 | 0.89 | 0.94  | 0.88 | 0.88 | 0.88  | 0.85 | 0.84 |
-| Nonprofits                                                                                     | 0.96 | 0.95  | 0.43 | 0.84 | 0.69 | 0.93  | 0.69 | 0.69 | 0.69  | 0.73 | 0.67 |
-| Service                                                                                        | 0.98 | 0.93  | 0.89 | 0.89 | 0.85 | 0.89  | 0.91 | 0.91 | 0.91  | 0.95 | 0.91 |
-| Media                                                                                          | 0.69 | 0.70  | 0.61 | 0.29 | 0.27 | 0.29  | 0.62 | 0.91 | 0.91  | 0.93 | 0.89 |
-| Construction                                                                                   | 0.97 | 0.97  | 0.35 | 0.89 | 0.64 | 0.93  | 0.62 | 0.63 | 0.63  | 0.62 | 0.60 |
-| Finance                                                                                        | 0.96 | 0.95  | 0.44 | 0.84 | 0.72 | 0.92  | 0.70 | 0.70 | 0.70  | 0.73 | 0.70 |
-| Entertainment                                                                                  | 0.91 | 0.93  | 0.35 | 0.82 | 0.67 | 0.88  | 0.66 | 0.67 | 0.67  | 0.65 | 0.56 |
-| Shipping                                                                                       | 0.95 | 0.34  | 0.31 | 0.93 | 0.87 | 0.94  | 0.34 | 0.34 | 0.34  | 0.88 | 0.34 |
-| Health Care                                                                                    | 0.96 | 0.96  | 0.42 | 0.84 | 0.77 | 0.91  | 0.76 | 0.76 | 0.76  | 0.76 | 0.69 |
-| Government                                                                                     | 0.98 | 0.97  | 0.96 | 0.98 | 0.96 | 0.98  | 0.96 | 0.96 | 0.96  | 0.96 | 0.96 |
-| Travel                                                                                         | 0.96 | 0.94  | 0.62 | 0.83 | 0.78 | 0.86  | 0.80 | 0.81 | 0.81  | 0.77 | 0.72 |
-| {: title="Relative destination AS reachability under ICMPv6 by industry category"#tab-ic-icmp} |      |       |      |      |      |       |      |      |       |      |      |
+| IC | Dst | AFrag | Frag | RH0 | RH2 | RH127 | MH | HIP | Shim6 | AH | ESP |
+|----|-----|-------|------|-----|-----|-------|-----|-----|-------|-----|-----|
+| Tech | 0.97 | 0.97 | 0.78 | 0.77 | 0.82 | 0.84 | 0.87 | 0.88 | 0.87 | 0.90 | 0.88 |
+| Other | 0.99 | 0.99 | 0.83 | 0.88 | 0.84 | 0.88 | 0.94 | 0.94 | 0.94 | 0.95 | 0.94 |
+| Retail | 0.98 | 0.78 | 0.69 | 0.82 | 0.77 | 0.83 | 0.75 | 0.74 | 0.75 | 0.92 | 0.74 |
+| Education | 0.97 | 0.93 | 0.58 | 0.86 | 0.78 | 0.89 | 0.78 | 0.82 | 0.82 | 0.80 | 0.76 |
+| Agriculture | 0.90 | 0.91 | 0.45 | 0.83 | 0.74 | 0.87 | 0.71 | 0.72 | 0.72 | 0.68 | 0.64 |
+| Manufacturing | 0.95 | 0.94 | 0.61 | 0.87 | 0.81 | 0.90 | 0.84 | 0.83 | 0.83 | 0.84 | 0.80 |
+| Utilities | 0.95 | 0.95 | 0.76 | 0.90 | 0.89 | 0.94 | 0.88 | 0.88 | 0.88 | 0.85 | 0.84 |
+| Nonprofits | 0.96 | 0.95 | 0.43 | 0.84 | 0.69 | 0.93 | 0.69 | 0.69 | 0.69 | 0.73 | 0.67 |
+| Service | 0.98 | 0.93 | 0.89 | 0.89 | 0.85 | 0.89 | 0.91 | 0.91 | 0.91 | 0.95 | 0.91 |
+| Media | 0.69 | 0.70 | 0.61 | 0.29 | 0.27 | 0.29 | 0.62 | 0.91 | 0.91 | 0.93 | 0.89 |
+| Construction | 0.97 | 0.97 | 0.35 | 0.89 | 0.64 | 0.93 | 0.62 | 0.63 | 0.63 | 0.62 | 0.60 |
+| Finance | 0.96 | 0.95 | 0.44 | 0.84 | 0.72 | 0.92 | 0.70 | 0.70 | 0.70 | 0.73 | 0.70 |
+| Entertainment | 0.91 | 0.93 | 0.35 | 0.82 | 0.67 | 0.88 | 0.66 | 0.67 | 0.67 | 0.65 | 0.56 |
+| Shipping | 0.95 | 0.34 | 0.31 | 0.93 | 0.87 | 0.94 | 0.34 | 0.34 | 0.34 | 0.88 | 0.34 |
+| Health Care | 0.96 | 0.96 | 0.42 | 0.84 | 0.77 | 0.91 | 0.76 | 0.76 | 0.76 | 0.76 | 0.69 |
+| Government | 0.98 | 0.97 | 0.96 | 0.98 | 0.96 | 0.98 | 0.96 | 0.96 | 0.96 | 0.96 | 0.96 |
+| Travel | 0.96 | 0.94 | 0.62 | 0.83 | 0.78 | 0.86 | 0.80 | 0.81 | 0.81 | 0.77 | 0.72 |
+{: title="Relative destination AS reachability under ICMPv6 by industry category" #tab-ic-icmp}
 
-| IC                                                                                            | Dst  | AFrag | Frag | RH0  | RH2  | RH127 | MH   | HIP  | Shim6 | AH   | ESP  |
-| --------------------------------------------------------------------------------------------- | ---- | ----- | ---- | ---- | ---- | ----- | ---- | ---- | ----- | ---- | ---- |
-| Tech                                                                                          | 1.00 | 1.00  | 0.86 | 0.87 | 0.85 | 0.87  | 0.98 | 0.98 | 0.98  | 0.98 | 0.98 |
-| Other                                                                                         | 0.99 | 1.00  | 0.88 | 0.84 | 0.83 | 0.85  | 0.99 | 1.01 | 0.99  | 1.00 | 1.01 |
-| Retail                                                                                        | 1.03 | 0.87  | 0.78 | 0.85 | 0.68 | 0.86  | 0.86 | 0.86 | 0.86  | 0.85 | 0.86 |
-| Education                                                                                     | 1.00 | 0.97  | 0.70 | 0.92 | 0.88 | 0.94  | 0.93 | 1.02 | 1.02  | 0.94 | 0.96 |
-| Agriculture                                                                                   | 0.79 | 0.86  | 0.48 | 0.75 | 0.72 | 0.76  | 0.74 | 0.77 | 0.77  | 0.72 | 0.70 |
-| Manufacturing                                                                                 | 0.99 | 0.99  | 0.70 | 0.96 | 0.94 | 0.97  | 1.01 | 1.02 | 1.02  | 0.98 | 1.02 |
-| Utilities                                                                                     | 1.01 | 1.02  | 0.85 | 0.98 | 0.96 | 0.99  | 0.97 | 0.99 | 0.99  | 0.95 | 0.96 |
-| Nonprofits                                                                                    | 0.99 | 0.97  | 0.51 | 0.89 | 0.83 | 0.97  | 0.87 | 0.88 | 0.88  | 0.85 | 0.86 |
-| Service                                                                                       | 1.00 | 1.00  | 0.40 | 0.97 | 0.70 | 0.97  | 0.71 | 0.73 | 0.73  | 0.69 | 0.70 |
-| Media                                                                                         | 1.00 | 0.98  | 0.95 | 0.90 | 0.86 | 0.90  | 0.97 | 0.97 | 0.97  | 0.97 | 0.97 |
-| Construction                                                                                  | 0.82 | 0.82  | 0.72 | 0.34 | 0.34 | 0.35  | 0.82 | 1.15 | 1.15  | 1.13 | 1.12 |
-| Finance                                                                                       | 0.97 | 0.97  | 0.53 | 0.84 | 0.82 | 0.94  | 0.84 | 0.85 | 0.86  | 0.85 | 0.85 |
-| Entertainment                                                                                 | 1.02 | 1.03  | 0.51 | 0.96 | 0.86 | 1.00  | 0.94 | 0.98 | 0.98  | 0.85 | 0.85 |
-| Shipping                                                                                      | 1.01 | 1.01  | 0.54 | 0.92 | 0.88 | 0.99  | 0.93 | 0.96 | 0.96  | 0.86 | 0.89 |
-| Health Care                                                                                   | 0.99 | 1.00  | 1.00 | 0.99 | 0.99 | 0.99  | 0.99 | 0.99 | 0.99  | 0.99 | 0.99 |
-| Government                                                                                    | 1.00 | 0.44  | 0.43 | 0.98 | 0.44 | 1.00  | 0.46 | 0.46 | 0.46  | 0.46 | 0.46 |
-| Travel                                                                                        | 1.03 | 1.03  | 0.79 | 0.98 | 0.98 | 1.01  | 1.04 | 1.07 | 1.07  | 0.97 | 0.98 |
-| {: title="Relative destination AS reachability under TCP/22 by industry category"#tab-ic-tcp} |      |       |      |      |      |       |      |      |       |      |      |
+| IC | Dst | AFrag | Frag | RH0 | RH2 | RH127 | MH | HIP | Shim6 | AH | ESP |
+|----|-----|-------|------|-----|-----|-------|-----|-----|-------|-----|-----|
+| Tech | 1.00 | 1.00 | 0.86 | 0.87 | 0.85 | 0.87 | 0.98 | 0.98 | 0.98 | 0.98 | 0.98 |
+| Other | 0.99 | 1.00 | 0.88 | 0.84 | 0.83 | 0.85 | 0.99 | 1.01 | 0.99 | 1.00 | 1.01 |
+| Retail | 1.03 | 0.87 | 0.78 | 0.85 | 0.68 | 0.86 | 0.86 | 0.86 | 0.86 | 0.85 | 0.86 |
+| Education | 1.00 | 0.97 | 0.70 | 0.92 | 0.88 | 0.94 | 0.93 | 1.02 | 1.02 | 0.94 | 0.96 |
+| Agriculture | 0.79 | 0.86 | 0.48 | 0.75 | 0.72 | 0.76 | 0.74 | 0.77 | 0.77 | 0.72 | 0.70 |
+| Manufacturing | 0.99 | 0.99 | 0.70 | 0.96 | 0.94 | 0.97 | 1.01 | 1.02 | 1.02 | 0.98 | 1.02 |
+| Utilities | 1.01 | 1.02 | 0.85 | 0.98 | 0.96 | 0.99 | 0.97 | 0.99 | 0.99 | 0.95 | 0.96 |
+| Nonprofits | 0.99 | 0.97 | 0.51 | 0.89 | 0.83 | 0.97 | 0.87 | 0.88 | 0.88 | 0.85 | 0.86 |
+| Service | 1.00 | 1.00 | 0.40 | 0.97 | 0.70 | 0.97 | 0.71 | 0.73 | 0.73 | 0.69 | 0.70 |
+| Media | 1.00 | 0.98 | 0.95 | 0.90 | 0.86 | 0.90 | 0.97 | 0.97 | 0.97 | 0.97 | 0.97 |
+| Construction | 0.82 | 0.82 | 0.72 | 0.34 | 0.34 | 0.35 | 0.82 | 1.15 | 1.15 | 1.13 | 1.12 |
+| Finance | 0.97 | 0.97 | 0.53 | 0.84 | 0.82 | 0.94 | 0.84 | 0.85 | 0.86 | 0.85 | 0.85 |
+| Entertainment | 1.02 | 1.03 | 0.51 | 0.96 | 0.86 | 1.00 | 0.94 | 0.98 | 0.98 | 0.85 | 0.85 |
+| Shipping | 1.01 | 1.01 | 0.54 | 0.92 | 0.88 | 0.99 | 0.93 | 0.96 | 0.96 | 0.86 | 0.89 |
+| Health Care | 0.99 | 1.00 | 1.00 | 0.99 | 0.99 | 0.99 | 0.99 | 0.99 | 0.99 | 0.99 | 0.99 |
+| Government | 1.00 | 0.44 | 0.43 | 0.98 | 0.44 | 1.00 | 0.46 | 0.46 | 0.46 | 0.46 | 0.46 |
+| Travel | 1.03 | 1.03 | 0.79 | 0.98 | 0.98 | 1.01 | 1.04 | 1.07 | 1.07 | 0.97 | 0.98 |
+{: title="Relative destination AS reachability under TCP/22 by industry category" #tab-ic-tcp}
 
-| IC                                                                                             | Dst  | AFrag | Frag | RH0  | RH2  | RH127 | MH   | HIP  | Shim6 | AH   | ESP  |
-| ---------------------------------------------------------------------------------------------- | ---- | ----- | ---- | ---- | ---- | ----- | ---- | ---- | ----- | ---- | ---- |
-| Tech                                                                                           | 0.99 | 0.99  | 0.88 | 0.84 | 0.84 | 0.84  | 0.99 | 0.97 | 1.00  | 1.00 | 1.01 |
-| Other                                                                                          | 1.00 | 1.00  | 0.87 | 0.88 | 0.86 | 0.88  | 0.99 | 0.99 | 0.99  | 1.00 | 0.99 |
-| Retail                                                                                         | 1.02 | 0.98  | 0.69 | 0.92 | 0.90 | 0.95  | 0.91 | 1.01 | 1.01  | 0.92 | 0.95 |
-| Education                                                                                      | 1.00 | 0.99  | 0.91 | 0.80 | 0.79 | 0.80  | 1.00 | 1.00 | 1.00  | 0.99 | 1.00 |
-| Agriculture                                                                                    | 0.82 | 0.82  | 0.47 | 0.78 | 0.79 | 0.80  | 0.75 | 0.77 | 0.78  | 0.72 | 0.70 |
-| Manufacturing                                                                                  | 1.02 | 1.01  | 0.71 | 0.99 | 0.95 | 1.00  | 1.00 | 1.12 | 1.14  | 0.97 | 1.12 |
-| Utilities                                                                                      | 1.01 | 1.00  | 0.84 | 0.97 | 0.98 | 0.99  | 0.97 | 0.99 | 0.99  | 0.94 | 0.94 |
-| Nonprofits                                                                                     | 1.00 | 1.00  | 0.54 | 0.96 | 0.93 | 0.96  | 0.95 | 0.98 | 0.98  | 0.93 | 0.93 |
-| Service                                                                                        | 0.99 | 0.99  | 0.96 | 0.89 | 0.87 | 0.89  | 0.99 | 0.99 | 0.99  | 0.99 | 0.99 |
-| Media                                                                                          | 0.77 | 0.77  | 0.65 | 0.32 | 0.31 | 0.32  | 0.76 | 1.10 | 1.10  | 1.09 | 1.08 |
-| Construction                                                                                   | 1.00 | 0.98  | 0.54 | 0.96 | 0.90 | 0.98  | 0.94 | 0.96 | 0.96  | 0.91 | 0.94 |
-| Finance                                                                                        | 0.97 | 0.96  | 0.57 | 0.93 | 0.92 | 0.94  | 0.92 | 0.95 | 0.95  | 0.93 | 0.94 |
-| Entertainment                                                                                  | 1.04 | 1.06  | 0.52 | 1.00 | 0.86 | 1.02  | 0.96 | 0.99 | 1.01  | 0.86 | 0.86 |
-| Shipping                                                                                       | 0.99 | 0.93  | 0.91 | 0.99 | 0.94 | 0.99  | 0.98 | 0.99 | 0.98  | 0.98 | 0.99 |
-| Health Care                                                                                    | 0.99 | 1.00  | 0.99 | 0.99 | 0.99 | 0.99  | 0.99 | 0.99 | 0.99  | 0.99 | 0.99 |
-| Government                                                                                     | 1.01 | 1.01  | 0.53 | 0.96 | 0.95 | 1.00  | 0.98 | 1.01 | 1.02  | 0.90 | 0.93 |
-| Travel                                                                                         | 1.03 | 1.02  | 0.67 | 0.97 | 0.94 | 1.00  | 0.97 | 1.33 | 1.33  | 0.87 | 1.18 |
-| {: title="Relative destination AS reachability under UDP/161 by industry category"#tab-ic-udp} |      |       |      |      |      |       |      |      |       |      |      |
+| IC | Dst | AFrag | Frag | RH0 | RH2 | RH127 | MH | HIP | Shim6 | AH | ESP |
+|----|-----|-------|------|-----|-----|-------|-----|-----|-------|-----|-----|
+| Tech | 0.99 | 0.99 | 0.88 | 0.84 | 0.84 | 0.84 | 0.99 | 0.97 | 1.00 | 1.00 | 1.01 |
+| Other | 1.00 | 1.00 | 0.87 | 0.88 | 0.86 | 0.88 | 0.99 | 0.99 | 0.99 | 1.00 | 0.99 |
+| Retail | 1.02 | 0.98 | 0.69 | 0.92 | 0.90 | 0.95 | 0.91 | 1.01 | 1.01 | 0.92 | 0.95 |
+| Education | 1.00 | 0.99 | 0.91 | 0.80 | 0.79 | 0.80 | 1.00 | 1.00 | 1.00 | 0.99 | 1.00 |
+| Agriculture | 0.82 | 0.82 | 0.47 | 0.78 | 0.79 | 0.80 | 0.75 | 0.77 | 0.78 | 0.72 | 0.70 |
+| Manufacturing | 1.02 | 1.01 | 0.71 | 0.99 | 0.95 | 1.00 | 1.00 | 1.12 | 1.14 | 0.97 | 1.12 |
+| Utilities | 1.01 | 1.00 | 0.84 | 0.97 | 0.98 | 0.99 | 0.97 | 0.99 | 0.99 | 0.94 | 0.94 |
+| Nonprofits | 1.00 | 1.00 | 0.54 | 0.96 | 0.93 | 0.96 | 0.95 | 0.98 | 0.98 | 0.93 | 0.93 |
+| Service | 0.99 | 0.99 | 0.96 | 0.89 | 0.87 | 0.89 | 0.99 | 0.99 | 0.99 | 0.99 | 0.99 |
+| Media | 0.77 | 0.77 | 0.65 | 0.32 | 0.31 | 0.32 | 0.76 | 1.10 | 1.10 | 1.09 | 1.08 |
+| Construction | 1.00 | 0.98 | 0.54 | 0.96 | 0.90 | 0.98 | 0.94 | 0.96 | 0.96 | 0.91 | 0.94 |
+| Finance | 0.97 | 0.96 | 0.57 | 0.93 | 0.92 | 0.94 | 0.92 | 0.95 | 0.95 | 0.93 | 0.94 |
+| Entertainment | 1.04 | 1.06 | 0.52 | 1.00 | 0.86 | 1.02 | 0.96 | 0.99 | 1.01 | 0.86 | 0.86 |
+| Shipping | 0.99 | 0.93 | 0.91 | 0.99 | 0.94 | 0.99 | 0.98 | 0.99 | 0.98 | 0.98 | 0.99 |
+| Health Care | 0.99 | 1.00 | 0.99 | 0.99 | 0.99 | 0.99 | 0.99 | 0.99 | 0.99 | 0.99 | 0.99 |
+| Government | 1.01 | 1.01 | 0.53 | 0.96 | 0.95 | 1.00 | 0.98 | 1.01 | 1.02 | 0.90 | 0.93 |
+| Travel | 1.03 | 1.02 | 0.67 | 0.97 | 0.94 | 1.00 | 0.97 | 1.33 | 1.33 | 0.87 | 1.18 |
+{: title="Relative destination AS reachability under UDP/161 by industry category" #tab-ic-udp}
 
 Two distinct forms of policy ossification are observed across
 industry categories:
@@ -639,20 +621,19 @@ enabling unauthorized access to services that would otherwise be protected.
 
 To identify which EHs may evade firewalls, the results of EH-carrying probes
 are compared with those of EH-free probes. The design of 6Travel minimizes
-the time gap between EH-carrying and EH-free probing, and results affected
-by path changes are effectively detected and excluded.
+the time gap between EH-carrying and EH-free probing.
 
 The following response types are defined:
 
-| Response Type                                                | Notation |
-| ------------------------------------------------------------ | -------- |
-| ICMPv6 Destination Unreachable (type 0, 2, 3)                | DU_addr  |
-| ICMPv6 Destination Unreachable (type 4)                      | DU_port  |
-| ICMPv6 Destination Unreachable (type 1, 5, 6)                | DU_deny  |
-| ICMPv6 Parameter Problem (from target)                       | PP_tgt   |
-| ICMPv6 Time Exceeded (code 0)                                | TE       |
-| ICMPv6 Echo Reply / TCP SYN-ACK or RST-ACK / SNMPv3 Response | Resp     |
-| {: title="Response types and their notation"#tab-response}   |          |
+| Response Type | Notation |
+|---------------|----------|
+| ICMPv6 Destination Unreachable (type 0, 2, 3) | DU_addr |
+| ICMPv6 Destination Unreachable (type 4) | DU_port |
+| ICMPv6 Destination Unreachable (type 1, 5, 6) | DU_deny |
+| ICMPv6 Parameter Problem (from target) | PP_tgt |
+| ICMPv6 Time Exceeded (code 0) | TE |
+| ICMPv6 Echo Reply / TCP SYN-ACK or RST-ACK / SNMPv3 Response | Resp |
+{: title="Response types and their notation" #tab-response}
 
 Four rules are defined to determine whether an EH-carrying probe type
 exhibits a response pattern consistent with firewall evasion:
@@ -680,12 +661,12 @@ potential firewall evasion.
 
 ### Overall Impact
 
-| Protocol                                                                               | # /48 Prefixes with Evasion Signatures | # ASes with Evasion Signatures |
-| -------------------------------------------------------------------------------------- | -------------------------------------- | ------------------------------ |
-| ICMPv6                                                                                 | 93,630 (1.6%)                          | 1,154 (4.9%)                   |
-| TCP/22                                                                                 | 218,954 (3.7%)                         | 4,961 (21.1%)                  |
-| UDP/161                                                                                | 195,175 (3.4%)                         | 4,468 (19.0%)                  |
-| {: title="Overall extent of EH-based firewall evasion signatures"#tab-evasion-summary} |                                        |                                |
+| Protocol | # Affected /48 Prefixes | # Affected ASes |
+|----------|------------------------|-----------------|
+| ICMPv6 | 93,630 (1.6%) | 1,154 (4.9%) |
+| TCP/22 | 218,954 (3.7%) | 4,961 (21.1%) |
+| UDP/161 | 195,175 (3.4%) | 4,468 (19.0%) |
+{: title="Overall extent of EH-based firewall evasion signatures" #tab-evasion-summary}
 
 While 93,630 /48 prefixes (1,154 ASes) exhibit evasion signatures under
 ICMPv6, the count nearly doubles under TCP/UDP, reaching 218,954 prefixes
@@ -698,19 +679,19 @@ yet evadable, security policies are disproportionately focused on TCP/UDP.
 {{tab-bypass-eh}} presents the number of /48 prefixes exhibiting EH-based
 evasion signatures across different EH types and protocols.
 
-| EH                                                                                                                        | ICMPv6 (K) | TCP/22 (K) | UDP/161 (K) |
-| ------------------------------------------------------------------------------------------------------------------------- | ---------- | ---------- | ----------- |
-| Dst                                                                                                                       | 6.0        | 54.4       | 37.0        |
-| AFrag                                                                                                                     | 7.3        | 58.6       | 40.3        |
-| RH0                                                                                                                       | 10.5       | 51.9       | 35.6        |
-| RH2                                                                                                                       | 10.1       | 46.9       | 46.9        |
-| RH127                                                                                                                     | 10.0       | 51.6       | 40.1        |
-| MH                                                                                                                        | 8.4        | 79.3       | 69.1        |
-| HIP                                                                                                                       | 18.6       | 110.6      | 91.5        |
-| Shim6                                                                                                                     | 8.9        | 94.5       | 84.0        |
-| AH                                                                                                                        | 71.7       | 117.7      | 110.6       |
-| ESP                                                                                                                       | 79.3       | 158.2      | 150.2       |
-| {: title="Number of /48 prefixes (in thousands) with EH-based firewall evasion signatures across EH types"#tab-bypass-eh} |            |            |             |
+| EH | ICMPv6 (K) | TCP/22 (K) | UDP/161 (K) |
+|----|-----------|-----------|------------|
+| Dst | 6.0 | 54.4 | 37.0 |
+| AFrag | 7.3 | 58.6 | 40.3 |
+| RH0 | 10.5 | 51.9 | 35.6 |
+| RH2 | 10.1 | 46.9 | 46.9 |
+| RH127 | 10.0 | 51.6 | 40.1 |
+| MH | 8.4 | 79.3 | 69.1 |
+| HIP | 18.6 | 110.6 | 91.5 |
+| Shim6 | 8.9 | 94.5 | 84.0 |
+| AH | 71.7 | 117.7 | 110.6 |
+| ESP | 79.3 | 158.2 | 150.2 |
+{: title="Number of /48 prefixes (in thousands) with EH-based firewall evasion signatures across EH types" #tab-bypass-eh}
 
 Evasion signatures vary across EH types, which is consistent
 with diverse underlying causes:
@@ -734,71 +715,71 @@ The following tables provide a breakdown of evasion signatures by industry
 category for each protocol. A /48 prefix or AS is counted multiple times
 if it belongs to multiple categories.
 
-| Industry Category                                                                                   | # /48s with Evasion Signatures | # ASes with Evasion Signatures |
-| --------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------ |
-| Agriculture                                                                                         | 3 (0.2%)                       | 2 (1.6%)                       |
-| Nonprofits                                                                                          | 18 (0.5%)                      | 14 (2.8%)                      |
-| Tech                                                                                                | 93,005 (1.6%)                  | 985 (5.9%)                     |
-| Construction                                                                                        | 10 (0.1%)                      | 9 (1.5%)                       |
-| Education                                                                                           | 65 (0.7%)                      | 28 (2.6%)                      |
-| Finance                                                                                             | 16 (0.2%)                      | 11 (2.7%)                      |
-| Shipping                                                                                            | 10 (0.0%)                      | 7 (3.3%)                       |
-| Government                                                                                          | 36 (0.0%)                      | 10 (2.1%)                      |
-| Health Care                                                                                         | 3 (0.4%)                       | 2 (1.1%)                       |
-| Manufacturing                                                                                       | 51 (1.2%)                      | 12 (2.2%)                      |
-| Media                                                                                               | 2,293 (2.3%)                   | 42 (3.7%)                      |
-| Entertainment                                                                                       | 5 (0.5%)                       | 4 (2.3%)                       |
-| Other                                                                                               | 394 (0.2%)                     | 103 (2.9%)                     |
-| Retail                                                                                              | 1,398 (0.6%)                   | 39 (3.1%)                      |
-| Service                                                                                             | 241 (0.0%)                     | 50 (2.6%)                      |
-| Travel                                                                                              | 6 (0.9%)                       | 4 (2.7%)                       |
-| Utilities                                                                                           | 7 (0.4%)                       | 5 (3.0%)                       |
-| **Total**                                                                                     | **93,630 (1.6%)**        | **1,154 (4.9%)**         |
-| {: title="EH-based firewall evasion signatures under ICMPv6 by industry category"#tab-evasion-icmp} |                                |                                |
+| Industry Category | # Affected /48s | # Affected ASes |
+|-------------------|-----------------|-----------------|
+| Agriculture | 3 (0.2%) | 2 (1.6%) |
+| Nonprofits | 18 (0.5%) | 14 (2.8%) |
+| Tech | 93,005 (1.6%) | 985 (5.9%) |
+| Construction | 10 (0.1%) | 9 (1.5%) |
+| Education | 65 (0.7%) | 28 (2.6%) |
+| Finance | 16 (0.2%) | 11 (2.7%) |
+| Shipping | 10 (0.0%) | 7 (3.3%) |
+| Government | 36 (0.0%) | 10 (2.1%) |
+| Health Care | 3 (0.4%) | 2 (1.1%) |
+| Manufacturing | 51 (1.2%) | 12 (2.2%) |
+| Media | 2,293 (2.3%) | 42 (3.7%) |
+| Entertainment | 5 (0.5%) | 4 (2.3%) |
+| Other | 394 (0.2%) | 103 (2.9%) |
+| Retail | 1,398 (0.6%) | 39 (3.1%) |
+| Service | 241 (0.0%) | 50 (2.6%) |
+| Travel | 6 (0.9%) | 4 (2.7%) |
+| Utilities | 7 (0.4%) | 5 (3.0%) |
+| **Total** | **93,630 (1.6%)** | **1,154 (4.9%)** |
+{: title="EH-based firewall evasion signatures under ICMPv6 by industry category" #tab-evasion-icmp}
 
-| Industry Category                                                                                  | # /48s with Evasion Signatures | # ASes with Evasion Signatures |
-| -------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------ |
-| Agriculture                                                                                        | 79 (4.2%)                      | 17 (14.2%)                     |
-| Nonprofits                                                                                         | 248 (7.0%)                     | 81 (16.5%)                     |
-| Tech                                                                                               | 210,516 (3.7%)                 | 4,046 (24.3%)                  |
-| Construction                                                                                       | 216 (2.5%)                     | 104 (17.5%)                    |
-| Education                                                                                          | 822 (9.1%)                     | 211 (19.5%)                    |
-| Finance                                                                                            | 198 (2.4%)                     | 55 (13.7%)                     |
-| Shipping                                                                                           | 76 (0.1%)                      | 36 (17.0%)                     |
-| Government                                                                                         | 204 (0.1%)                     | 67 (14.3%)                     |
-| Health Care                                                                                        | 85 (10.5%)                     | 25 (13.4%)                     |
-| Manufacturing                                                                                      | 636 (13.9%)                    | 92 (16.9%)                     |
-| Media                                                                                              | 13,690 (14.4%)                 | 254 (22.5%)                    |
-| Entertainment                                                                                      | 66 (6.7%)                      | 21 (12.3%)                     |
-| Other                                                                                              | 7,100 (2.8%)                   | 435 (12.4%)                    |
-| Retail                                                                                             | 5,306 (2.4%)                   | 222 (17.5%)                    |
-| Service                                                                                            | 4,141 (0.8%)                   | 338 (17.7%)                    |
-| Travel                                                                                             | 61 (9.2%)                      | 18 (12.4%)                     |
-| Utilities                                                                                          | 94 (5.7%)                      | 30 (18.2%)                     |
-| **Total**                                                                                    | **218,954 (3.7%)**       | **4,961 (21.1%)**        |
-| {: title="EH-based firewall evasion signatures under TCP/22 by industry category"#tab-evasion-tcp} |                                |                                |
+| Industry Category | # Affected /48s | # Affected ASes |
+|-------------------|-----------------|-----------------|
+| Agriculture | 79 (4.2%) | 17 (14.2%) |
+| Nonprofits | 248 (7.0%) | 81 (16.5%) |
+| Tech | 210,516 (3.7%) | 4,046 (24.3%) |
+| Construction | 216 (2.5%) | 104 (17.5%) |
+| Education | 822 (9.1%) | 211 (19.5%) |
+| Finance | 198 (2.4%) | 55 (13.7%) |
+| Shipping | 76 (0.1%) | 36 (17.0%) |
+| Government | 204 (0.1%) | 67 (14.3%) |
+| Health Care | 85 (10.5%) | 25 (13.4%) |
+| Manufacturing | 636 (13.9%) | 92 (16.9%) |
+| Media | 13,690 (14.4%) | 254 (22.5%) |
+| Entertainment | 66 (6.7%) | 21 (12.3%) |
+| Other | 7,100 (2.8%) | 435 (12.4%) |
+| Retail | 5,306 (2.4%) | 222 (17.5%) |
+| Service | 4,141 (0.8%) | 338 (17.7%) |
+| Travel | 61 (9.2%) | 18 (12.4%) |
+| Utilities | 94 (5.7%) | 30 (18.2%) |
+| **Total** | **218,954 (3.7%)** | **4,961 (21.1%)** |
+{: title="EH-based firewall evasion signatures under TCP/22 by industry category" #tab-evasion-tcp}
 
-| Industry Category                                                                                   | # /48s with Evasion Signatures | # ASes with Evasion Signatures |
-| --------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------------------ |
-| Agriculture                                                                                         | 78 (4.1%)                      | 16 (13.3%)                     |
-| Nonprofits                                                                                          | 207 (5.8%)                     | 77 (15.7%)                     |
-| Tech                                                                                                | 187,933 (3.4%)                 | 3,658 (22.0%)                  |
-| Construction                                                                                        | 157 (1.8%)                     | 84 (14.2%)                     |
-| Education                                                                                           | 853 (9.4%)                     | 185 (17.0%)                    |
-| Finance                                                                                             | 131 (1.6%)                     | 47 (11.6%)                     |
-| Shipping                                                                                            | 56 (0.0%)                      | 31 (14.8%)                     |
-| Government                                                                                          | 181 (0.1%)                     | 60 (12.9%)                     |
-| Health Care                                                                                         | 77 (9.6%)                      | 29 (15.9%)                     |
-| Manufacturing                                                                                       | 537 (12.1%)                    | 64 (11.7%)                     |
-| Media                                                                                               | 9,915 (10.5%)                  | 210 (18.7%)                    |
-| Entertainment                                                                                       | 50 (5.1%)                      | 16 (9.2%)                      |
-| Other                                                                                               | 6,014 (2.4%)                   | 385 (10.9%)                    |
-| Retail                                                                                              | 2,037 (0.9%)                   | 170 (13.5%)                    |
-| Service                                                                                             | 929 (0.2%)                     | 277 (14.5%)                    |
-| Travel                                                                                              | 25 (4.2%)                      | 11 (7.6%)                      |
-| Utilities                                                                                           | 75 (4.6%)                      | 19 (11.4%)                     |
-| **Total**                                                                                     | **195,175 (3.4%)**       | **4,468 (19.0%)**        |
-| {: title="EH-based firewall evasion signatures under UDP/161 by industry category"#tab-evasion-udp} |                                |                                |
+| Industry Category | # Affected /48s | # Affected ASes |
+|-------------------|-----------------|-----------------|
+| Agriculture | 78 (4.1%) | 16 (13.3%) |
+| Nonprofits | 207 (5.8%) | 77 (15.7%) |
+| Tech | 187,933 (3.4%) | 3,658 (22.0%) |
+| Construction | 157 (1.8%) | 84 (14.2%) |
+| Education | 853 (9.4%) | 185 (17.0%) |
+| Finance | 131 (1.6%) | 47 (11.6%) |
+| Shipping | 56 (0.0%) | 31 (14.8%) |
+| Government | 181 (0.1%) | 60 (12.9%) |
+| Health Care | 77 (9.6%) | 29 (15.9%) |
+| Manufacturing | 537 (12.1%) | 64 (11.7%) |
+| Media | 9,915 (10.5%) | 210 (18.7%) |
+| Entertainment | 50 (5.1%) | 16 (9.2%) |
+| Other | 6,014 (2.4%) | 385 (10.9%) |
+| Retail | 2,037 (0.9%) | 170 (13.5%) |
+| Service | 929 (0.2%) | 277 (14.5%) |
+| Travel | 25 (4.2%) | 11 (7.6%) |
+| Utilities | 75 (4.6%) | 19 (11.4%) |
+| **Total** | **195,175 (3.4%)** | **4,468 (19.0%)** |
+{: title="EH-based firewall evasion signatures under UDP/161 by industry category" #tab-evasion-udp}
 
 Industry-category-wise, the Tech category accounts for the largest share of
 evasion signatures, followed by Media and Retail, which also show elevated
@@ -812,39 +793,39 @@ percentage of apparently evaded firewalls located in intermediate ASes
 versus destination ASes is reported, together with the percentage of
 on-path versus host-side firewalls.
 
-| Protocol                                                                                                     | EH    | Intermediate AS (%) | Destination AS (%) | On-path (%) | Host-side (%) |
-| ------------------------------------------------------------------------------------------------------------ | ----- | ------------------- | ------------------ | ----------- | ------------- |
-| ICMPv6                                                                                                       | Dst   | 90.7                | 9.3                | 98.7        | 1.3           |
-| ICMPv6                                                                                                       | AFrag | 90.5                | 9.5                | 98.6        | 1.4           |
-| ICMPv6                                                                                                       | RH0   | 86.0                | 14.0               | 97.8        | 2.2           |
-| ICMPv6                                                                                                       | RH2   | 77.1                | 22.9               | 81.3        | 18.8          |
-| ICMPv6                                                                                                       | RH127 | 88.8                | 11.3               | 98.8        | 1.3           |
-| ICMPv6                                                                                                       | MH    | 91.4                | 8.6                | 97.5        | 2.5           |
-| ICMPv6                                                                                                       | HIP   | 82.1                | 17.9               | 92.6        | 7.4           |
-| ICMPv6                                                                                                       | Shim6 | 85.8                | 14.2               | 93.4        | 6.6           |
-| ICMPv6                                                                                                       | AH    | 89.7                | 10.3               | 97.1        | 2.9           |
-| ICMPv6                                                                                                       | ESP   | 82.4                | 17.6               | 97.3        | 2.7           |
-| TCP/22                                                                                                       | Dst   | 71.8                | 28.2               | 92.0        | 8.0           |
-| TCP/22                                                                                                       | AFrag | 77.1                | 22.9               | 84.7        | 15.3          |
-| TCP/22                                                                                                       | RH0   | 87.4                | 12.6               | 97.8        | 2.2           |
-| TCP/22                                                                                                       | RH2   | 61.4                | 38.6               | 74.9        | 25.1          |
-| TCP/22                                                                                                       | RH127 | 87.6                | 12.4               | 98.2        | 1.8           |
-| TCP/22                                                                                                       | MH    | 21.3                | 78.7               | 97.2        | 2.8           |
-| TCP/22                                                                                                       | HIP   | 25.1                | 74.9               | 90.6        | 9.4           |
-| TCP/22                                                                                                       | Shim6 | 23.4                | 76.6               | 92.2        | 7.8           |
-| TCP/22                                                                                                       | AH    | 89.5                | 10.5               | 97.7        | 2.3           |
-| TCP/22                                                                                                       | ESP   | 29.2                | 70.8               | 97.8        | 2.2           |
-| UDP/161                                                                                                      | Dst   | 87.1                | 12.9               | 94.8        | 5.2           |
-| UDP/161                                                                                                      | AFrag | 70.8                | 29.2               | 75.5        | 24.5          |
-| UDP/161                                                                                                      | RH0   | 84.8                | 15.2               | 94.2        | 5.9           |
-| UDP/161                                                                                                      | RH2   | 64.2                | 35.8               | 72.7        | 27.3          |
-| UDP/161                                                                                                      | RH127 | 86.8                | 13.2               | 95.4        | 4.6           |
-| UDP/161                                                                                                      | MH    | 13.4                | 86.6               | 98.6        | 1.4           |
-| UDP/161                                                                                                      | HIP   | 29.8                | 70.2               | 97.3        | 2.7           |
-| UDP/161                                                                                                      | Shim6 | 29.6                | 70.4               | 97.3        | 2.7           |
-| UDP/161                                                                                                      | AH    | 91.7                | 8.3                | 94.0        | 6.0           |
-| UDP/161                                                                                                      | ESP   | 59.5                | 40.5               | 97.2        | 2.8           |
-| {: title="Spatial distribution of apparently evaded firewalls across EH types and protocols"#tab-bypass-loc} |       |                     |                    |             |               |
+| Protocol | EH | Intermediate AS (%) | Destination AS (%) | On-path (%) | Host-side (%) |
+|----------|-----|--------------------|--------------------|-------------|---------------|
+| ICMPv6 | Dst | 90.7 | 9.3 | 98.7 | 1.3 |
+| ICMPv6 | AFrag | 90.5 | 9.5 | 98.6 | 1.4 |
+| ICMPv6 | RH0 | 86.0 | 14.0 | 97.8 | 2.2 |
+| ICMPv6 | RH2 | 77.1 | 22.9 | 81.3 | 18.8 |
+| ICMPv6 | RH127 | 88.8 | 11.3 | 98.8 | 1.3 |
+| ICMPv6 | MH | 91.4 | 8.6 | 97.5 | 2.5 |
+| ICMPv6 | HIP | 82.1 | 17.9 | 92.6 | 7.4 |
+| ICMPv6 | Shim6 | 85.8 | 14.2 | 93.4 | 6.6 |
+| ICMPv6 | AH | 89.7 | 10.3 | 97.1 | 2.9 |
+| ICMPv6 | ESP | 82.4 | 17.6 | 97.3 | 2.7 |
+| TCP/22 | Dst | 71.8 | 28.2 | 92.0 | 8.0 |
+| TCP/22 | AFrag | 77.1 | 22.9 | 84.7 | 15.3 |
+| TCP/22 | RH0 | 87.4 | 12.6 | 97.8 | 2.2 |
+| TCP/22 | RH2 | 61.4 | 38.6 | 74.9 | 25.1 |
+| TCP/22 | RH127 | 87.6 | 12.4 | 98.2 | 1.8 |
+| TCP/22 | MH | 21.3 | 78.7 | 97.2 | 2.8 |
+| TCP/22 | HIP | 25.1 | 74.9 | 90.6 | 9.4 |
+| TCP/22 | Shim6 | 23.4 | 76.6 | 92.2 | 7.8 |
+| TCP/22 | AH | 89.5 | 10.5 | 97.7 | 2.3 |
+| TCP/22 | ESP | 29.2 | 70.8 | 97.8 | 2.2 |
+| UDP/161 | Dst | 87.1 | 12.9 | 94.8 | 5.2 |
+| UDP/161 | AFrag | 70.8 | 29.2 | 75.5 | 24.5 |
+| UDP/161 | RH0 | 84.8 | 15.2 | 94.2 | 5.9 |
+| UDP/161 | RH2 | 64.2 | 35.8 | 72.7 | 27.3 |
+| UDP/161 | RH127 | 86.8 | 13.2 | 95.4 | 4.6 |
+| UDP/161 | MH | 13.4 | 86.6 | 98.6 | 1.4 |
+| UDP/161 | HIP | 29.8 | 70.2 | 97.3 | 2.7 |
+| UDP/161 | Shim6 | 29.6 | 70.4 | 97.3 | 2.7 |
+| UDP/161 | AH | 91.7 | 8.3 | 94.0 | 6.0 |
+| UDP/161 | ESP | 59.5 | 40.5 | 97.2 | 2.8 |
+{: title="Spatial distribution of apparently evaded firewalls across EH types and protocols" #tab-bypass-loc}
 
 Several patterns emerge from this analysis:
 
@@ -1012,9 +993,9 @@ and not systematically biased toward specific EH types.
 
 **Transient Host Dynamics:**
 During parallel probing, some destination hosts may experience short-term
-changes in availability or port state. The measurement system incorporates
-mechanisms to identify and exclude unstable hosts, and this limitation does
-not materially impact the overall conclusions.
+changes in availability or port state. Such transient effects are expected
+to be limited and are not systematically biased toward specific EH types,
+and therefore do not materially impact the overall conclusions.
 
 # Reproducing the Measurements
 
