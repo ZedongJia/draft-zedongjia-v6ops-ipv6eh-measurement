@@ -1311,10 +1311,7 @@ spanning both on-path and host-side firewalls.<a href="#section-abstract-2" clas
             <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-reproducing-the-measurement" class="internal xref">Reproducing the Measurements</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -3900,36 +3897,32 @@ network evolution.<a href="#section-7.3-2.4.1" class="pilcrow">¶</a></p>
       <h2 id="name-ethical-considerations">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-ethical-considerations" class="section-name selfRef">Ethical Considerations</a>
       </h2>
-<p id="appendix-A-1">We strictly adhere to the ethical guidelines of network measurement and
-fully consider the measurement impact, benign probing, and anonymity.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">The measurements strictly adhere to the ethical guidelines of network
+measurement, with full consideration of measurement impact, benign probing,
+and anonymity.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-A-2"><strong>Measurement Impact:</strong>
 In compliance with the standards outlined in <span>[<a href="#RFC4443" class="cite xref">RFC4443</a>]</span>, the number of
 packets sent to each target address is limited to one per second, and each
-probe is only sent once per hop. We distribute probes across multiple
+probe is only sent once per hop. Probes are distributed across multiple
 addresses by randomizing target addresses, instead of repeatedly targeting
-a single address. Additionally, we impose an overall rate limit of 50K
-packets per second, which effectively reduces the impact on both the
+a single address. Additionally, an overall rate limit of 50K
+packets per second is imposed, which reduces the impact on both the
 vantage point network and the target network.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 <p id="appendix-A-3"><strong>Benign Probing:</strong>
-All probes are constructed using standard-compliant protocols. We do not
-exploit any vulnerabilities or craft malicious payloads. The probes do not
-carry harmful data, and the responses do not contain personally
-identifiable or sensitive information. For TCP/22, we perform only
-half-open probing without establishing full connections. For UDP/161, we
-send SNMPv3 Get Requests without any follow-up interaction.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
+All probes are constructed using standard-compliant protocols. No
+vulnerabilities are exploited and no malicious payloads are crafted. The
+probes do not carry harmful data, and the responses do not contain
+personally identifiable or sensitive information. For TCP/22, only
+half-open probing is performed without establishing full connections. For
+UDP/161, SNMPv3 Get Requests are sent without any follow-up interaction.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 <p id="appendix-A-4"><strong>Opt-out Mechanism:</strong>
-We maintain a public web portal providing our research identity and contact
-information. This allows network administrators to opt out of our scanning
-scope. To date, we have received no complaints or opt-out requests.<a href="#appendix-A-4" class="pilcrow">¶</a></p>
+A public web portal provides research identity and contact information,
+allowing network administrators to opt out of the scanning scope. To date,
+no complaints or opt-out requests have been received.<a href="#appendix-A-4" class="pilcrow">¶</a></p>
 <p id="appendix-A-5"><strong>Anonymity:</strong>
-We do not publicly disclose raw IPv6 address details. We only report
-aggregated statistics and analysis results. The collected data is used
+Raw IPv6 address details are not publicly disclosed. Only aggregated
+statistics and analysis results are reported. The collected data is used
 solely for research purposes.<a href="#appendix-A-5" class="pilcrow">¶</a></p>
-<p id="appendix-A-6"><strong>Disclosure:</strong>
-We have communicated with the administrators of a campus network and
-addressed the identified firewall evasion issues. For other ASes where
-potential firewall vulnerabilities were observed, we are actively
-contacting the relevant network operators to inform them of the findings.<a href="#appendix-A-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="appendix-caveats">
@@ -3977,19 +3970,8 @@ conduct similar studies over time to observe changes in the handling of
 packets with IPv6 Extension Headers.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="acknowledgments">
-<section id="appendix-D">
-      <h2 id="name-acknowledgments">
-<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
-      </h2>
-<p id="appendix-D-1">We would like to thank Daguo Cheng, Chentian Wei, Zhaoan Wang, Kun Guo, and Chenyi Liu
-for their contributions to this work. We also thank the network
-administrators who cooperated with our disclosure efforts and the reviewers
-who provided valuable feedback on earlier versions of this document.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
-</section>
-</div>
 <div id="authors-addresses">
-<section id="appendix-E">
+<section id="appendix-D">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
