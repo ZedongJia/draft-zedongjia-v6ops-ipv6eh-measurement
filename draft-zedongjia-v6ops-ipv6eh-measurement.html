@@ -19,36 +19,37 @@ their flexibility introduces significant security risks.
        This document presents observations from a comprehensive, large-scale
 measurement study of IPv6 Extension Header path traversal across more than
 23,000 autonomous systems. Using a feedback-driven measurement framework
-called 6Travel, we measure the reachability of 10 common IPv6 Extension
-Headers over ICMPv6, TCP, and UDP. Our analysis reveals a fundamental
-shift: contrary to past observations of heavy filtering, specific
+called 6Travel, the reachability of 11 common IPv6 Extension Headers is
+measured over ICMPv6, TCP, and UDP. The measurements indicate a notable
+change: contrary to past observations of heavy filtering, specific
 Extension Headers now achieve reachability comparable to plain traffic.
-We further identify two distinct forms of policy ossification across
-industry categories and expose a widespread Extension-Header-based
-firewall evasion vulnerability affecting nearly 5,000 autonomous systems,
-particularly under TCP and UDP. This threat stems from a dual failure of
-implementation flaws and security misconfigurations, spanning both on-path
-and host-side firewalls. 
+Two distinct forms of policy ossification are observed across industry
+categories, together with widespread potential Extension-Header-based
+firewall evasion signatures in nearly 5,000 autonomous systems,
+particularly under TCP and UDP. These signatures appear consistent with a
+combination of implementation flaws and security misconfigurations,
+spanning both on-path and host-side firewalls. 
     " name="description">
-<meta content="xml2rfc 3.33.0" name="generator">
+<meta content="xml2rfc 3.34.0" name="generator">
 <meta content="IPv6" name="keyword">
 <meta content="IPv6 Extension Header" name="keyword">
 <meta content="Reachability" name="keyword">
 <meta content="Evasion" name="keyword">
 <meta content="draft-zedongjia-v6ops-ipv6eh-measurement-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.33.0
-    Python 3.12.13
-    ConfigArgParse 1.7
+  xml2rfc 3.34.0
+    Python 3.14.5
+    ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 6.0.2
-    platformdirs 4.9.6
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.10.1
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.7.0
+    wcwidth 0.8.2
 -->
 <link href="draft-zedongjia-v6ops-ipv6eh-measurement.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1126,16 +1127,16 @@ their flexibility introduces significant security risks.<a href="#section-abstra
 <p id="section-abstract-2">This document presents observations from a comprehensive, large-scale
 measurement study of IPv6 Extension Header path traversal across more than
 23,000 autonomous systems. Using a feedback-driven measurement framework
-called 6Travel, we measure the reachability of 10 common IPv6 Extension
-Headers over ICMPv6, TCP, and UDP. Our analysis reveals a fundamental
-shift: contrary to past observations of heavy filtering, specific
+called 6Travel, the reachability of 11 common IPv6 Extension Headers is
+measured over ICMPv6, TCP, and UDP. The measurements indicate a notable
+change: contrary to past observations of heavy filtering, specific
 Extension Headers now achieve reachability comparable to plain traffic.
-We further identify two distinct forms of policy ossification across
-industry categories and expose a widespread Extension-Header-based
-firewall evasion vulnerability affecting nearly 5,000 autonomous systems,
-particularly under TCP and UDP. This threat stems from a dual failure of
-implementation flaws and security misconfigurations, spanning both on-path
-and host-side firewalls.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+Two distinct forms of policy ossification are observed across industry
+categories, together with widespread potential Extension-Header-based
+firewall evasion signatures in nearly 5,000 autonomous systems,
+particularly under TCP and UDP. These signatures appear consistent with a
+combination of implementation flaws and security misconfigurations,
+spanning both on-path and host-side firewalls.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1239,7 +1240,7 @@ and host-side firewalls.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-observations-on-eh-based-fi" class="internal xref">Observations on EH-based Firewall Evasion</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-observations-on-potential-e" class="internal xref">Observations on Potential EH-based Firewall Evasion</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-threat-model" class="internal xref">Threat Model</a></p>
@@ -1248,10 +1249,10 @@ and host-side firewalls.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-threat-scenarios" class="internal xref">Threat Scenarios</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
-                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-identifying-eh-based-firewa" class="internal xref">Identifying EH-based Firewall Evasion</a></p>
+                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-identifying-potential-eh-ba" class="internal xref">Identifying Potential EH-based Firewall Evasion</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4">
-                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-extent-of-firewall-evasion" class="internal xref">Extent of Firewall Evasion</a></p>
+                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.  <a href="#name-extent-of-potential-firewal" class="internal xref">Extent of Potential Firewall Evasion</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4.2.1">
                     <p id="section-toc.1-1.6.2.4.2.1.1"><a href="#section-6.4.1" class="auto internal xref">6.4.1</a>.  <a href="#name-overall-impact" class="internal xref">Overall Impact</a></p>
@@ -1276,7 +1277,7 @@ and host-side firewalls.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-eh-based-firewall-evasion" class="internal xref">EH-based Firewall Evasion</a></p>
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-potential-eh-based-firewall" class="internal xref">Potential EH-based Firewall Evasion</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-attack-surface-expansion" class="internal xref">Attack Surface Expansion</a></p>
@@ -1335,9 +1336,9 @@ including Mobile IPv6 (MIPv6) <span>[<a href="#RFC6275" class="cite xref">RFC627
 <span>[<a href="#RFC8754" class="cite xref">RFC8754</a>]</span> <span>[<a href="#RFC9256" class="cite xref">RFC9256</a>]</span>, In-band Operations, Administration, and
 Maintenance (IOAM) <span>[<a href="#RFC9197" class="cite xref">RFC9197</a>]</span>, and IPSec <span>[<a href="#RFC4302" class="cite xref">RFC4302</a>]</span> <span>[<a href="#RFC4303" class="cite xref">RFC4303</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">Given the increasingly widespread adoption of EHs, characterizing their
-reachability has become paramount. Researchers have extensively investigated
-their path traversal capabilities <span>[<a href="#RFC7872" class="cite xref">RFC7872</a>]</span> <span>[<a href="#Huston-2022" class="cite xref">Huston-2022</a>]</span>
-        <span>[<a href="#Custura2024" class="cite xref">Custura2024</a>]</span> <span>[<a href="#JAMES" class="cite xref">JAMES</a>]</span> <span>[<a href="#FishNet" class="cite xref">FishNet</a>]</span>. Collectively, these studies reveal
+reachability has become paramount. Their path traversal capabilities have
+been extensively investigated <span>[<a href="#RFC7872" class="cite xref">RFC7872</a>]</span> <span>[<a href="#Huston-2022" class="cite xref">Huston-2022</a>]</span>
+        <span>[<a href="#Custura2024" class="cite xref">Custura2024</a>]</span> <span>[<a href="#JAMES" class="cite xref">JAMES</a>]</span> <span>[<a href="#FishNet" class="cite xref">FishNet</a>]</span>. Collectively, these studies report
 that IPv6 packets carrying EHs experience significantly higher drop rates
 compared to plain IPv6 traffic, highlighting a fragmented and often
 restrictive deployment landscape across the global Internet.<a href="#section-1-2" class="pilcrow">¶</a></p>
@@ -1349,7 +1350,7 @@ end-to-end measurements, which suffer from substantial resource overhead,
 limited measurement integrity, and constrained observation scope.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">Despite their importance, the processing of EHs introduces significant
 security challenges <span>[<a href="#RFC9098" class="cite xref">RFC9098</a>]</span> <span>[<a href="#RFC9099" class="cite xref">RFC9099</a>]</span>. IPv6 requires all EHs to be
-processed to identify upper-layer protocols, which allows attackers to
+processed to identify upper-layer protocols, which may allow attackers to
 evade firewalls and packet filters that improperly handle or overlook
 inserted EHs during security enforcement <span>[<a href="#Atlasis2016" class="cite xref">Atlasis2016</a>]</span> <span>[<a href="#RFC7112" class="cite xref">RFC7112</a>]</span>
         <span>[<a href="#FragEvasion" class="cite xref">FragEvasion</a>]</span>. Moreover, specific EH types harbor inherent architectural
@@ -1357,35 +1358,36 @@ flaws exploitable for targeted attacks, such as amplification
 <span>[<a href="#RFC5095" class="cite xref">RFC5095</a>]</span>, overlapping fragment evasion <span>[<a href="#RFC5722" class="cite xref">RFC5722</a>]</span>, processing of
 atomic fragments <span>[<a href="#RFC6946" class="cite xref">RFC6946</a>]</span>, information leakage <span>[<a href="#RFC7739" class="cite xref">RFC7739</a>]</span>, and
 Denial of Service (DoS) attacks <span>[<a href="#RFC8021" class="cite xref">RFC8021</a>]</span>.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">Motivated by these observations, we conduct a comprehensive, large-scale
-measurement study of EH path traversal using 6Travel <span>[<a href="#_6Travel" class="cite xref">_6Travel</a>]</span>, a
-feedback-driven measurement framework. Our measurements cover 6.3 million
-/48 prefixes across more than 23,000 ASes, evaluating 10 common EHs over
-ICMPv6, TCP, and UDP. The key findings are summarized as follows:<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-5">Motivated by these observations, this document reports a comprehensive,
+large-scale measurement study of EH path traversal conducted with 6Travel
+<span>[<a href="#_6Travel" class="cite xref">_6Travel</a>]</span>, a feedback-driven measurement framework. The measurements
+cover 6.3 million /48 prefixes across more than 23,000 ASes, evaluating 11
+common EHs over ICMPv6, TCP, and UDP. The key findings are summarized as
+follows:<a href="#section-1-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-6.1">
           <p id="section-1-6.1.1"><strong>EH Path Traversal Capability:</strong> Specific EHs, notably the
 Destination Options header and the Atomic Fragment header, now achieve
 reachability comparable to plain traffic under TCP and UDP, contrary to
-historical observations of heavy filtering. This signifies an evolving
-IPv6 infrastructure that enables practical deployment of EH-based
-applications but simultaneously expands the attack surface.<a href="#section-1-6.1.1" class="pilcrow">¶</a></p>
+historical observations of heavy filtering. This is consistent with an
+evolving IPv6 infrastructure that enables practical deployment of
+EH-based applications but simultaneously expands the attack surface.<a href="#section-1-6.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-6.2">
-          <p id="section-1-6.2.1"><strong>Policy Ossification:</strong> We identify two counter-posed forms of policy
-ossification across industry categories: (i) Availability-oriented
-ossification, which prioritizes utility at the expense of an expanded
-attack surface; and (ii) Security-oriented ossification, which secures
-the boundary but hinders IPv6 architectural evolution through rigid
-filtering.<a href="#section-1-6.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-6.2.1"><strong>Policy Ossification:</strong> Two counter-posed forms of policy
+ossification are observed across industry categories: (i)
+Availability-oriented ossification, which prioritizes utility at the
+expense of an expanded attack surface; and (ii) Security-oriented
+ossification, which secures the boundary but hinders IPv6 architectural
+evolution through rigid filtering.<a href="#section-1-6.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-6.3">
-          <p id="section-1-6.3.1"><strong>EH-based Firewall Evasion:</strong> We expose a widespread firewall evasion
-vulnerability affecting nearly 5,000 ASes, particularly under TCP and
-UDP. This vulnerability stems from implementation flaws (e.g., protocol
-blind spots for less common EHs, over-permissiveness for IPSec) and
-security misconfigurations (e.g., neglecting to parse EHs), spanning
-both on-path and host-side firewalls.<a href="#section-1-6.3.1" class="pilcrow">¶</a></p>
+          <p id="section-1-6.3.1"><strong>Potential EH-based Firewall Evasion:</strong> Widespread potential firewall
+evasion signatures are observed in nearly 5,000 ASes, particularly under
+TCP and UDP. These signatures appear consistent with implementation
+flaws (e.g., protocol blind spots for less common EHs, over-permissiveness
+for IPSec) and security misconfigurations (e.g., neglecting to parse EHs),
+spanning both on-path and host-side firewalls.<a href="#section-1-6.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-1-7">This document is organized as follows. <a href="#background" class="auto internal xref">Section 3</a> provides background
@@ -1466,15 +1468,16 @@ multi-homing support, respectively.<a href="#section-3-3.7.1" class="pilcrow">¶
       <h2 id="name-measurement-methodology">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-measurement-methodology" class="section-name selfRef">Measurement Methodology</a>
       </h2>
-<p id="section-4-1">This section describes the measurement methodology employed in this study,
-including the measurement framework, address dataset, and the selection of
-EHs and upper-layer protocols.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">This section describes the measurement methodology, including the
+measurement framework, address dataset, and the selection of EHs and
+upper-layer protocols.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="framework">
 <section id="section-4.1">
         <h3 id="name-measurement-framework">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-measurement-framework" class="section-name selfRef">Measurement Framework</a>
         </h3>
-<p id="section-4.1-1">We use 6Travel <span>[<a href="#_6Travel" class="cite xref">_6Travel</a>]</span>, a feedback-driven measurement framework designed
+<p id="section-4.1-1">The measurements use 6Travel <span>[<a href="#_6Travel" class="cite xref">_6Travel</a>]</span>, a feedback-driven measurement
+framework designed
 for large-scale EH path traversal measurement. The framework employs a
 hybrid approach that integrates traceroute-based and end-to-end methods to
 assess the traversal capability of crafted probe packets. Specifically,
@@ -1498,17 +1501,17 @@ validation to ensure measurement consistency.<a href="#section-4.1-2" class="pil
         <h3 id="name-measurement-setup">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-measurement-setup" class="section-name selfRef">Measurement Setup</a>
         </h3>
-<p id="section-4.2-1">We conduct the EH path traversal measurement in an education network with
-a single vantage point (VP). The network is confirmed to have no enforced
-access control policies on all EHs. The VP is equipped with a 24-core
-Intel(R) Xeon(R) CPU E5-2620 v3 and 64 GB of RAM.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">We empirically set a timeout of 5 seconds for each probe to ensure
+<p id="section-4.2-1">The EH path traversal measurement was conducted from a single vantage
+point (VP) in an education network. The network is confirmed to have no
+enforced access control policies on all EHs. The VP is equipped with a
+24-core Intel(R) Xeon(R) CPU E5-2620 v3 and 64 GB of RAM.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">A timeout of 5 seconds is set for each probe to allow
 sufficient time for responses. To mitigate the impact of ICMPv6 rate
-limiting and reduce the probing burden on target networks, we randomize the
-probing address list before each measurement round. Additionally, to
-minimize interference with both the local and target networks, we set the
-hop limits to 8--30. The probing rate is configured to 50,000 packets
-per second.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+limiting and reduce the probing burden on target networks, the
+probing address list is randomized before each measurement round.
+Additionally, to minimize interference with both the local and target
+networks, the hop limits are set to 8--30. The probing rate is configured
+to 50,000 packets per second.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="dataset">
@@ -1516,8 +1519,9 @@ per second.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
         <h3 id="name-address-dataset">
 <a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-address-dataset" class="section-name selfRef">Address Dataset</a>
         </h3>
-<p id="section-4.3-1">To ensure a representative and large-scale perspective, we aggregate target
-addresses from three complementary sources, as detailed in <a href="#tab-source" class="auto internal xref">Table 1</a>.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-1">To ensure a representative and large-scale perspective, target
+addresses are aggregated from three complementary sources, as detailed in
+<a href="#tab-source" class="auto internal xref">Table 1</a>.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 <span id="name-details-of-three-data-sourc"></span><div id="tab-source">
 <table class="center" id="table-1">
           <caption>
@@ -1579,7 +1583,7 @@ to discover active targets in ASes lacking known active IPv6 addresses.
 Source 3 incorporates passive NTP traffic from the IPv6 Observatory
 <span>[<a href="#IPv6-Observatory" class="cite xref">IPv6-Observatory</a>]</span> to capture hosts typically invisible to active probing.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
 <p id="section-4.3-4">Since access control policies for EHs are typically enforced at the prefix
-level rather than on individual hosts, we adopt prefix-level sampling by
+level rather than on individual hosts, prefix-level sampling is adopted by
 randomly selecting one address within each /48 prefix. The /48 prefix
 length represents the shortest globally routable prefix length commonly
 announced in the BGP system. Industry categories are determined using
@@ -1591,11 +1595,11 @@ ASdb <span>[<a href="#ASdb" class="cite xref">ASdb</a>]</span>.<a href="#section
         <h3 id="name-selection-of-ehs-and-upper-">
 <a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-selection-of-ehs-and-upper-" class="section-name selfRef">Selection of EHs and Upper-layer Protocols</a>
         </h3>
-<p id="section-4.4-1">To evaluate the path traversal capability of EHs, we select the EHs
-depicted in <a href="#tab-eh" class="auto internal xref">Table 2</a>, covering six application scenarios: data
+<p id="section-4.4-1">To evaluate the path traversal capability of EHs, the EHs
+depicted in <a href="#tab-eh" class="auto internal xref">Table 2</a> are selected, covering six application scenarios: data
 transmission (AFrag, Frag), secure communication (AH, ESP), Mobile IPv6
-(RH2, MH), site multi-homing (HIP, Shim6), new Routing header type
-(RH127), and general function extension (Dst).<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+(RH2, MH), site multi-homing (HIP, Shim6), Routing header types
+(RH0, RH127), and general function extension (Dst).<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 <span id="name-ehs-measured"></span><div id="tab-eh">
 <table class="center" id="table-2">
           <caption>
@@ -1683,12 +1687,12 @@ transmission (AFrag, Frag), secure communication (AH, ESP), Mobile IPv6
 <p id="section-4.4-3">For each EH, the probe is constructed by adding the EH between the IPv6
 base header and the upper-layer protocol header. The upper-layer protocols
 measured are ICMPv6, TCP/22 (SSH), and UDP/161 (SNMPv3).<a href="#section-4.4-3" class="pilcrow">¶</a></p>
-<p id="section-4.4-4">Although our measurement vantage point does not explicitly block the
-Hop-by-Hop Options header, we observed that packets carrying it are dropped
+<p id="section-4.4-4">Although the measurement vantage point does not explicitly block the
+Hop-by-Hop Options header, packets carrying it were observed to be dropped
 by default, likely due to default router configurations. Given that
 previous large-scale studies have consistently reported extremely poor
 reachability for the Hop-by-Hop Options header <span>[<a href="#RFC7872" class="cite xref">RFC7872</a>]</span> <span>[<a href="#Huston-2022" class="cite xref">Huston-2022</a>]</span>
-          <span>[<a href="#Custura2024" class="cite xref">Custura2024</a>]</span> <span>[<a href="#JAMES" class="cite xref">JAMES</a>]</span> <span>[<a href="#FishNet" class="cite xref">FishNet</a>]</span>, we exclude it from our path
+          <span>[<a href="#Custura2024" class="cite xref">Custura2024</a>]</span> <span>[<a href="#JAMES" class="cite xref">JAMES</a>]</span> <span>[<a href="#FishNet" class="cite xref">FishNet</a>]</span>, it is excluded from the path
 traversal measurements as its limited reachability is already well-documented.<a href="#section-4.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1699,11 +1703,11 @@ traversal measurements as its limited reachability is already well-documented.<a
       <h2 id="name-observations-on-eh-path-tra">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-observations-on-eh-path-tra" class="section-name selfRef">Observations on EH Path Traversal</a>
       </h2>
-<p id="section-5-1">We conducted a comprehensive path traversal measurement across all
+<p id="section-5-1">A comprehensive path traversal measurement was conducted across all
 combinations of EHs and upper-layer protocols. To ensure data quality,
-we apply a filtering process to identify and discard /48 prefixes exhibiting
-path changes during probing. <a href="#tab-path-unchanged" class="auto internal xref">Table 3</a> summarizes the filtered
-dataset.<a href="#section-5-1" class="pilcrow">¶</a></p>
+a filtering process is applied to identify and discard /48 prefixes
+exhibiting path changes during probing. <a href="#tab-path-unchanged" class="auto internal xref">Table 3</a> summarizes
+the filtered dataset.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <span id="name-number-of-48-prefixes-with-"></span><div id="tab-path-unchanged">
 <table class="center" id="table-3">
         <caption>
@@ -1745,7 +1749,7 @@ dataset.<a href="#section-5-1" class="pilcrow">¶</a></p>
         <h3 id="name-destination-as-reachability">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-destination-as-reachability" class="section-name selfRef">Destination AS Reachability</a>
         </h3>
-<p id="section-5.1-1">We evaluate the destination AS reachability rate, defined as the proportion
+<p id="section-5.1-1">The destination AS reachability rate is defined as the proportion
 of /48 prefixes for which probes successfully reach their respective
 destination AS out of the total set of probed prefixes. The baseline
 represents EH-free probes per protocol. <a href="#tab-path-traversal-overview" class="auto internal xref">Table 4</a>
@@ -1840,26 +1844,26 @@ presents the results for each EH across protocols.<a href="#section-5.1-1" class
           </tbody>
         </table>
 </div>
-<p id="section-5.1-3">Our results reveal several critical insights:<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">The results indicate several patterns:<a href="#section-5.1-3" class="pilcrow">¶</a></p>
 <p id="section-5.1-4"><strong>Dst and AFrag achieve reachability comparable to the baseline</strong>, while
-Frag experiences significant drops (7.6%--14.8%), undermining the utility
-of fragmentation-dependent services such as DNSSEC.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+Frag experiences significant drops (7.6%--14.8%), which may undermine the
+utility of fragmentation-dependent services such as DNSSEC.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
 <p id="section-5.1-5"><strong>Routing headers (RHs) exhibit consistently low reachability</strong>, with RH2
 and RH127 being largely suppressed under TCP/UDP despite moderate ICMPv6
-reachability. This pattern suggests a diagnostic-only tolerance, where
-network operators may relax filtering for ICMPv6 to preserve basic
+reachability. This pattern is consistent with a diagnostic-only tolerance,
+where network operators may relax filtering for ICMPv6 to preserve basic
 connectivity, while enforcing stricter policies on TCP/UDP.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
 <p id="section-5.1-6"><strong>A protocol-dependent disparity</strong> emerges for MH, HIP, Shim6, AH, and
 ESP. While these headers fall 7.9%--10.4% below the baseline under ICMPv6,
 they remain consistently within 2% of the baseline under TCP/UDP, with AH
-and ESP occasionally even exceeding it. This shift suggests that these
-headers benefit from permissive inspection policies or preferential
+and ESP occasionally even exceeding it. This shift is consistent with these
+headers benefiting from permissive inspection policies or preferential
 treatment (e.g., whitelisting of encrypted-like traffic).<a href="#section-5.1-6" class="pilcrow">¶</a></p>
-<p id="section-5.1-7">These findings indicate a maturing IPv6 infrastructure where specific EHs
-have transitioned from high drop rates to near-parity with plain traffic.
-While this enables the practical deployment of EH-based applications
-(e.g., MIPv6, IPSec), it simultaneously expands the network attack surface
-for EH-based exploits.<a href="#section-5.1-7" class="pilcrow">¶</a></p>
+<p id="section-5.1-7">These observations are consistent with a maturing IPv6 infrastructure where
+specific EHs have transitioned from high drop rates to near-parity with
+plain traffic. While this enables the practical deployment of EH-based
+applications (e.g., MIPv6, IPSec), it simultaneously expands the network
+attack surface for EH-based exploits.<a href="#section-5.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ic-reachability">
@@ -1868,8 +1872,8 @@ for EH-based exploits.<a href="#section-5.1-7" class="pilcrow">¶</a></p>
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-reachability-across-industr" class="section-name selfRef">Reachability Across Industry Categories</a>
         </h3>
 <p id="section-5.2-1">To dissect the security-reachability tradeoff across diverse network
-environments, we categorize the results by industry category (IC) for each
-/48 prefix.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+environments, the results are categorized by industry category (IC) for
+each /48 prefix.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2-2">The following tables display the ratio of destination AS reachability for
 EH-carrying probes relative to the EH-free baseline within each industry
 category. The ratio is calculated as R_EH / R_Baseline. Values of 1.0
@@ -2668,7 +2672,7 @@ counted multiple times if it belongs to multiple industry categories.<a href="#s
           </tbody>
         </table>
 </div>
-<p id="section-5.2-6">Our analysis reveals two distinct forms of policy ossification across
+<p id="section-5.2-6">The analysis reveals two distinct forms of policy ossification across
 industry categories:<a href="#section-5.2-6" class="pilcrow">¶</a></p>
 <p id="section-5.2-7"><strong>Availability-oriented ossification:</strong> In industry categories like Travel,
 Construction, Media, and Manufacturing, reachability for certain EHs
@@ -2693,34 +2697,34 @@ middlebox interference.<a href="#section-5.2-9" class="pilcrow">¶</a></p>
 </div>
 <div id="evasion">
 <section id="section-6">
-      <h2 id="name-observations-on-eh-based-fi">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-observations-on-eh-based-fi" class="section-name selfRef">Observations on EH-based Firewall Evasion</a>
+      <h2 id="name-observations-on-potential-e">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-observations-on-potential-e" class="section-name selfRef">Observations on Potential EH-based Firewall Evasion</a>
       </h2>
 <p id="section-6-1">Building upon the measurement results presented in <a href="#path-traversal" class="auto internal xref">Section 5</a>,
 several EHs exhibit destination reachability that exceeds the established
-baseline, indicating the presence of practical firewall evasion capability.
-This section presents a threat model, identifies threat scenarios, and
-quantifies the extent of firewall evasion observed.<a href="#section-6-1" class="pilcrow">¶</a></p>
+baseline. Such discrepancies are consistent with potential firewall
+evasion. This section presents a threat model, identifies threat scenarios,
+and quantifies the extent of the potential evasion observed.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <div id="threat-model">
 <section id="section-6.1">
         <h3 id="name-threat-model">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-threat-model" class="section-name selfRef">Threat Model</a>
         </h3>
-<p id="section-6.1-1">We consider a remote adversary located outside the victim network, capable
-of crafting and sending arbitrary IPv6 packets, including those with EHs,
-from a controlled host. The adversary has no access to the firewall or end
-hosts and cannot compromise their implementations. Firewalls may be deployed
-either on-path or at end hosts.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-1">The threat model considers a remote adversary located outside the victim
+network, capable of crafting and sending arbitrary IPv6 packets, including
+those with EHs, from a controlled host. The adversary has no access to the
+firewall or end hosts and cannot compromise their implementations.
+Firewalls may be deployed either on-path or at end hosts.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-2">In this context, firewall broadly refers to any middlebox or network device
 that enforces access control based on ACLs, including dedicated firewalls,
 border routers, and stateful appliances.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.1-3">We assume a typical deployment where: (i) end hosts process supported EHs
-correctly and generate ICMPv6 Parameter Problem messages for unsupported
-EHs; (ii) the firewall is configured to allow legitimate TCP, UDP, and
-ICMPv6 traffic while attempting to block reconnaissance and unauthorized
-access; and (iii) the firewall may enforce access control only on ICMPv6,
-TCP, and UDP traffic without explicitly considering EHs, or improperly
-process packets carrying EHs.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">The model assumes a typical deployment where: (i) end hosts process
+supported EHs correctly and generate ICMPv6 Parameter Problem messages for
+unsupported EHs; (ii) the firewall is configured to allow legitimate TCP,
+UDP, and ICMPv6 traffic while attempting to block reconnaissance and
+unauthorized access; and (iii) the firewall may enforce access control only
+on ICMPv6, TCP, and UDP traffic without explicitly considering EHs, or
+improperly process packets carrying EHs.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 <p id="section-6.1-4">The adversary's primary goals are to: (i) perform stealthy network
 reconnaissance to map hidden topologies and live hosts, and (ii) violate
 access-control policies by accessing internal services protected by
@@ -2733,33 +2737,33 @@ firewalls.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-threat-scenarios" class="section-name selfRef">Threat Scenarios</a>
         </h3>
 <p id="section-6.2-1">Building upon related work <span>[<a href="#IPv6-Vul" class="cite xref">IPv6-Vul</a>]</span> and validated through local
-proof-of-concept demonstrations (see <a href="#real-exp" class="auto internal xref">Section 6.4.5</a>), we identify two primary
-threat scenarios:<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+proof-of-concept demonstrations (see <a href="#real-exp" class="auto internal xref">Section 6.4.5</a>), two primary
+threat scenarios are identified:<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2"><strong>Scenario 1: Hidden Network Discovery.</strong> For EHs that require specific
 host-side processing support, an adversary can insert them into standard
-topology or host discovery probes (e.g., ICMPv6 Echo Request). These
-modified probes evade firewall filtering rules, allowing reconnaissance of
-otherwise hidden network topologies and hosts. The same technique can be
+topology or host discovery probes (e.g., ICMPv6 Echo Request). Such
+modified probes may evade firewall filtering rules, allowing reconnaissance
+of otherwise hidden network topologies and hosts. The same technique can be
 combined with source address spoofing to launch reflection or amplification
 attacks.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.2-3"><strong>Scenario 2: Unauthorized Access.</strong> For non-disruptive EHs (e.g.,
 Destination Options header or Atomic Fragment header), an adversary can
 append them to otherwise legitimate TCP/UDP packets. These EHs are crafted
 so as not to interfere with the target's transport-layer protocol parsing,
-yet they cause firewalls to skip deep packet inspection, enabling
-unauthorized access to services that would otherwise be protected.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+yet they may cause firewalls to skip deep packet inspection, potentially
+enabling unauthorized access to services that would otherwise be protected.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="identifying-evasion">
 <section id="section-6.3">
-        <h3 id="name-identifying-eh-based-firewa">
-<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-identifying-eh-based-firewa" class="section-name selfRef">Identifying EH-based Firewall Evasion</a>
+        <h3 id="name-identifying-potential-eh-ba">
+<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-identifying-potential-eh-ba" class="section-name selfRef">Identifying Potential EH-based Firewall Evasion</a>
         </h3>
-<p id="section-6.3-1">To identify which EHs successfully evade firewalls, we compare the results
-of EH-carrying probes with those of EH-free probes. The design of 6Travel
-minimizes the time gap between EH-carrying and EH-free probing, and
-results affected by path changes are effectively detected and excluded.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
-<p id="section-6.3-2">We define the following response types:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">To identify which EHs may evade firewalls, the results of EH-carrying probes
+are compared with those of EH-free probes. The design of 6Travel minimizes
+the time gap between EH-carrying and EH-free probing, and results affected
+by path changes are effectively detected and excluded.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">The following response types are defined:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <span id="name-response-types-and-their-no"></span><div id="tab-response">
 <table class="center" id="table-8">
           <caption>
@@ -2800,56 +2804,57 @@ results affected by path changes are effectively detected and excluded.<a href="
           </tbody>
         </table>
 </div>
-<p id="section-6.3-4">We define four rules to determine whether an EH-carrying probe type
-successfully evades a firewall:<a href="#section-6.3-4" class="pilcrow">¶</a></p>
+<p id="section-6.3-4">Four rules are defined to determine whether an EH-carrying probe type
+exhibits a response pattern consistent with firewall evasion:<a href="#section-6.3-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-5.1">
             <p id="section-6.3-5.1.1"><strong>Rule 1:</strong> The EH-free probe type receives a DU_addr, whereas the
-EH-carrying probe type successfully receives a PP_tgt or Resp.<a href="#section-6.3-5.1.1" class="pilcrow">¶</a></p>
+EH-carrying probe type receives a PP_tgt or Resp.<a href="#section-6.3-5.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.3-5.2">
             <p id="section-6.3-5.2.1"><strong>Rule 2:</strong> The EH-free probe type receives a DU_port, whereas the
-EH-carrying probe type successfully receives a Resp.<a href="#section-6.3-5.2.1" class="pilcrow">¶</a></p>
+EH-carrying probe type receives a Resp.<a href="#section-6.3-5.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.3-5.3">
             <p id="section-6.3-5.3.1"><strong>Rule 3:</strong> The EH-free probe type is denied access with a DU_deny,
-while the EH-carrying probe type successfully receives DU_addr,
+while the EH-carrying probe type receives DU_addr,
 DU_port, PP_tgt, or Resp.<a href="#section-6.3-5.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.3-5.4">
             <p id="section-6.3-5.4.1"><strong>Rule 4:</strong> The EH-free probe type is silently discarded (receives a
-TE), but the EH-carrying probe type successfully receives DU_addr,
+TE), but the EH-carrying probe type receives DU_addr,
 DU_port, PP_tgt, or Resp.<a href="#section-6.3-5.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-6.3-6">For Rules 1--3, we can further identify the addresses of the firewall
-devices evaded via EHs by extracting information from the returned ICMPv6
-Destination Unreachable messages.<a href="#section-6.3-6" class="pilcrow">¶</a></p>
+<p id="section-6.3-6">For Rules 1--3, the addresses of the firewall devices apparently evaded via
+EHs can be further identified by extracting information from the returned
+ICMPv6 Destination Unreachable messages.<a href="#section-6.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="evasion-extent">
 <section id="section-6.4">
-        <h3 id="name-extent-of-firewall-evasion">
-<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-extent-of-firewall-evasion" class="section-name selfRef">Extent of Firewall Evasion</a>
+        <h3 id="name-extent-of-potential-firewal">
+<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-extent-of-potential-firewal" class="section-name selfRef">Extent of Potential Firewall Evasion</a>
         </h3>
-<p id="section-6.4-1">We quantify the number of affected /48 prefixes and ASes across different
-industry categories to evaluate the extent of firewall evasion.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-1">The number of /48 prefixes and ASes exhibiting evasion signatures across
+different industry categories is quantified to evaluate the extent of
+potential firewall evasion.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <div id="overall-impact">
 <section id="section-6.4.1">
           <h4 id="name-overall-impact">
 <a href="#section-6.4.1" class="section-number selfRef">6.4.1. </a><a href="#name-overall-impact" class="section-name selfRef">Overall Impact</a>
           </h4>
-<span id="name-overall-impact-of-eh-based-"></span><div id="tab-evasion-summary">
+<span id="name-overall-extent-of-eh-based-"></span><div id="tab-evasion-summary">
 <table class="center" id="table-9">
             <caption>
 <a href="#table-9" class="selfRef">Table 9</a>:
-<a href="#name-overall-impact-of-eh-based-" class="selfRef">Overall impact of EH-based firewall evasion</a>
+<a href="#name-overall-extent-of-eh-based-" class="selfRef">Overall extent of EH-based firewall evasion signatures</a>
             </caption>
 <thead>
               <tr>
                 <th class="text-left" rowspan="1" colspan="1">Protocol</th>
-                <th class="text-left" rowspan="1" colspan="1"># Affected /48 Prefixes</th>
-                <th class="text-left" rowspan="1" colspan="1"># Affected ASes</th>
+                <th class="text-left" rowspan="1" colspan="1"># /48 Prefixes with Evasion Signatures</th>
+                <th class="text-left" rowspan="1" colspan="1"># ASes with Evasion Signatures</th>
               </tr>
             </thead>
             <tbody>
@@ -2871,11 +2876,11 @@ industry categories to evaluate the extent of firewall evasion.<a href="#section
             </tbody>
           </table>
 </div>
-<p id="section-6.4.1-2">While 93,630 /48 prefixes (1,154 ASes) are affected under ICMPv6, the
-impact nearly doubles under TCP/UDP, reaching 218,954 prefixes (4,961 ASes)
-for TCP and 195,175 prefixes (4,468 ASes) for UDP. This disparity aligns
-with the diagnostic-only nature of ICMPv6, where stricter, yet evadable,
-security policies are disproportionately focused on TCP/UDP.<a href="#section-6.4.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.4.1-2">While 93,630 /48 prefixes (1,154 ASes) exhibit evasion signatures under
+ICMPv6, the count nearly doubles under TCP/UDP, reaching 218,954 prefixes
+(4,961 ASes) for TCP and 195,175 prefixes (4,468 ASes) for UDP. This
+disparity aligns with the diagnostic-only nature of ICMPv6, where stricter,
+yet evadable, security policies are disproportionately focused on TCP/UDP.<a href="#section-6.4.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="breakdown-by-eh-type">
@@ -2883,13 +2888,13 @@ security policies are disproportionately focused on TCP/UDP.<a href="#section-6.
           <h4 id="name-breakdown-by-eh-type">
 <a href="#section-6.4.2" class="section-number selfRef">6.4.2. </a><a href="#name-breakdown-by-eh-type" class="section-name selfRef">Breakdown by EH Type</a>
           </h4>
-<p id="section-6.4.2-1"><a href="#tab-bypass-eh" class="auto internal xref">Table 10</a> presents the number of /48 prefixes affected by EH-based
-firewall evasion across different EH types and protocols.<a href="#section-6.4.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.4.2-1"><a href="#tab-bypass-eh" class="auto internal xref">Table 10</a> presents the number of /48 prefixes exhibiting EH-based
+evasion signatures across different EH types and protocols.<a href="#section-6.4.2-1" class="pilcrow">¶</a></p>
 <span id="name-number-of-48-prefixes-in-th"></span><div id="tab-bypass-eh">
 <table class="center" id="table-10">
             <caption>
 <a href="#table-10" class="selfRef">Table 10</a>:
-<a href="#name-number-of-48-prefixes-in-th" class="selfRef">Number of /48 prefixes (in thousands) affected by EH-based firewall evasion across EH types</a>
+<a href="#name-number-of-48-prefixes-in-th" class="selfRef">Number of /48 prefixes (in thousands) with EH-based firewall evasion signatures across EH types</a>
             </caption>
 <thead>
               <tr>
@@ -2963,12 +2968,13 @@ firewall evasion across different EH types and protocols.<a href="#section-6.4.2
             </tbody>
           </table>
 </div>
-<p id="section-6.4.2-3">Evasion capabilities vary significantly across EH types, revealing diverse
-underlying causes:<a href="#section-6.4.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.4.2-3">Evasion signatures vary significantly across EH types, which is consistent
+with diverse underlying causes:<a href="#section-6.4.2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.4.2-4.1">
-              <p id="section-6.4.2-4.1.1"><strong>AH and ESP</strong> consistently exhibit the highest evasion rates, likely
-due to lenient inspection of IPSec-related traffic for service continuity.<a href="#section-6.4.2-4.1.1" class="pilcrow">¶</a></p>
+              <p id="section-6.4.2-4.1.1"><strong>AH and ESP</strong> consistently exhibit the highest evasion-signature rates,
+likely due to lenient inspection of IPSec-related traffic for service
+continuity.<a href="#section-6.4.2-4.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-6.4.2-4.2">
               <p id="section-6.4.2-4.2.1"><strong>MH, HIP, and Shim6</strong> --- which are not defined in <span>[<a href="#RFC8200" class="cite xref">RFC8200</a>]</span> ---
@@ -2990,20 +2996,20 @@ Shim6 under TCP/UDP.<a href="#section-6.4.2-4.3.1" class="pilcrow">¶</a></p>
           <h4 id="name-breakdown-by-industry-categ">
 <a href="#section-6.4.3" class="section-number selfRef">6.4.3. </a><a href="#name-breakdown-by-industry-categ" class="section-name selfRef">Breakdown by Industry Category</a>
           </h4>
-<p id="section-6.4.3-1">The following tables provide a breakdown of firewall evasion by industry
+<p id="section-6.4.3-1">The following tables provide a breakdown of evasion signatures by industry
 category for each protocol. A /48 prefix or AS is counted multiple times
 if it belongs to multiple categories.<a href="#section-6.4.3-1" class="pilcrow">¶</a></p>
-<span id="name-firewall-evasion-under-icmp"></span><div id="tab-evasion-icmp">
+<span id="name-eh-based-firewall-evasion-s"></span><div id="tab-evasion-icmp">
 <table class="center" id="table-11">
             <caption>
 <a href="#table-11" class="selfRef">Table 11</a>:
-<a href="#name-firewall-evasion-under-icmp" class="selfRef">Firewall evasion under ICMPv6 by industry category</a>
+<a href="#name-eh-based-firewall-evasion-s" class="selfRef">EH-based firewall evasion signatures under ICMPv6 by industry category</a>
             </caption>
 <thead>
               <tr>
                 <th class="text-left" rowspan="1" colspan="1">Industry Category</th>
-                <th class="text-left" rowspan="1" colspan="1"># Affected /48s</th>
-                <th class="text-left" rowspan="1" colspan="1"># Affected ASes</th>
+                <th class="text-left" rowspan="1" colspan="1"># /48s with Evasion Signatures</th>
+                <th class="text-left" rowspan="1" colspan="1"># ASes with Evasion Signatures</th>
               </tr>
             </thead>
             <tbody>
@@ -3106,17 +3112,17 @@ if it belongs to multiple categories.<a href="#section-6.4.3-1" class="pilcrow">
             </tbody>
           </table>
 </div>
-<span id="name-firewall-evasion-under-tcp-"></span><div id="tab-evasion-tcp">
+<span id="name-eh-based-firewall-evasion-si"></span><div id="tab-evasion-tcp">
 <table class="center" id="table-12">
             <caption>
 <a href="#table-12" class="selfRef">Table 12</a>:
-<a href="#name-firewall-evasion-under-tcp-" class="selfRef">Firewall evasion under TCP/22 by industry category</a>
+<a href="#name-eh-based-firewall-evasion-si" class="selfRef">EH-based firewall evasion signatures under TCP/22 by industry category</a>
             </caption>
 <thead>
               <tr>
                 <th class="text-left" rowspan="1" colspan="1">Industry Category</th>
-                <th class="text-left" rowspan="1" colspan="1"># Affected /48s</th>
-                <th class="text-left" rowspan="1" colspan="1"># Affected ASes</th>
+                <th class="text-left" rowspan="1" colspan="1"># /48s with Evasion Signatures</th>
+                <th class="text-left" rowspan="1" colspan="1"># ASes with Evasion Signatures</th>
               </tr>
             </thead>
             <tbody>
@@ -3219,17 +3225,17 @@ if it belongs to multiple categories.<a href="#section-6.4.3-1" class="pilcrow">
             </tbody>
           </table>
 </div>
-<span id="name-firewall-evasion-under-udp-"></span><div id="tab-evasion-udp">
+<span id="name-eh-based-firewall-evasion-sig"></span><div id="tab-evasion-udp">
 <table class="center" id="table-13">
             <caption>
 <a href="#table-13" class="selfRef">Table 13</a>:
-<a href="#name-firewall-evasion-under-udp-" class="selfRef">Firewall evasion under UDP/161 by industry category</a>
+<a href="#name-eh-based-firewall-evasion-sig" class="selfRef">EH-based firewall evasion signatures under UDP/161 by industry category</a>
             </caption>
 <thead>
               <tr>
                 <th class="text-left" rowspan="1" colspan="1">Industry Category</th>
-                <th class="text-left" rowspan="1" colspan="1"># Affected /48s</th>
-                <th class="text-left" rowspan="1" colspan="1"># Affected ASes</th>
+                <th class="text-left" rowspan="1" colspan="1"># /48s with Evasion Signatures</th>
+                <th class="text-left" rowspan="1" colspan="1"># ASes with Evasion Signatures</th>
               </tr>
             </thead>
             <tbody>
@@ -3332,9 +3338,9 @@ if it belongs to multiple categories.<a href="#section-6.4.3-1" class="pilcrow">
             </tbody>
           </table>
 </div>
-<p id="section-6.4.3-5">Industry-category-wise, the Tech category dominates the evasion landscape,
-followed by Media and Retail, which show significant susceptibility,
-particularly under TCP/UDP.<a href="#section-6.4.3-5" class="pilcrow">¶</a></p>
+<p id="section-6.4.3-5">Industry-category-wise, the Tech category dominates the evasion-signature
+landscape, followed by Media and Retail, which show significant
+susceptibility, particularly under TCP/UDP.<a href="#section-6.4.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="on-path-vs-host-side-evasion">
@@ -3342,15 +3348,16 @@ particularly under TCP/UDP.<a href="#section-6.4.3-5" class="pilcrow">¶</a></p>
           <h4 id="name-on-path-vs-host-side-evasio">
 <a href="#section-6.4.4" class="section-number selfRef">6.4.4. </a><a href="#name-on-path-vs-host-side-evasio" class="section-name selfRef">On-path vs. Host-side Evasion</a>
           </h4>
-<p id="section-6.4.4-1"><a href="#tab-bypass-loc" class="auto internal xref">Table 14</a> presents the spatial distribution of evaded firewalls
-across EH types and protocols. For each combination, we report the
-percentage of evaded firewalls located in intermediate ASes versus
-destination ASes, and the percentage of on-path versus host-side firewalls.<a href="#section-6.4.4-1" class="pilcrow">¶</a></p>
-<span id="name-spatial-distribution-of-eva"></span><div id="tab-bypass-loc">
+<p id="section-6.4.4-1"><a href="#tab-bypass-loc" class="auto internal xref">Table 14</a> presents the spatial distribution of apparently evaded
+firewalls across EH types and protocols. For each combination, the
+percentage of apparently evaded firewalls located in intermediate ASes
+versus destination ASes is reported, together with the percentage of
+on-path versus host-side firewalls.<a href="#section-6.4.4-1" class="pilcrow">¶</a></p>
+<span id="name-spatial-distribution-of-app"></span><div id="tab-bypass-loc">
 <table class="center" id="table-14">
             <caption>
 <a href="#table-14" class="selfRef">Table 14</a>:
-<a href="#name-spatial-distribution-of-eva" class="selfRef">Spatial distribution of evaded firewalls across EH types and protocols</a>
+<a href="#name-spatial-distribution-of-app" class="selfRef">Spatial distribution of apparently evaded firewalls across EH types and protocols</a>
             </caption>
 <thead>
               <tr>
@@ -3607,20 +3614,20 @@ destination ASes, and the percentage of on-path versus host-side firewalls.<a hr
           </table>
 </div>
 <p id="section-6.4.4-3">Several key patterns emerge from this analysis:<a href="#section-6.4.4-3" class="pilcrow">¶</a></p>
-<p id="section-6.4.4-4"><strong>Evasion predominantly occurs within intermediate ASes under ICMPv6</strong>, with
-most EHs showing over 80% of evaded firewalls in intermediate ASes.
-However, this shifts dramatically for TCP/UDP: MH, HIP, and Shim6 exhibit
-78.7%, 74.9%, and 76.6% destination AS evasion under TCP/22 respectively,
-potentially reflecting a deliberate policy to avoid disrupting TCP/UDP EH
-processing at the edge.<a href="#section-6.4.4-4" class="pilcrow">¶</a></p>
-<p id="section-6.4.4-5"><strong>Conversely, evasion for Dst and AFrag remains concentrated in intermediate
-ASes</strong> (71.8% and 77.1% under TCP/22 respectively), possibly due to
-centralized upstream filtering that leaves downstream destination ASes
-exposed.<a href="#section-6.4.4-5" class="pilcrow">¶</a></p>
-<p id="section-6.4.4-6"><strong>While most evaded firewalls are on-path</strong>, AFrag and RH2 exhibit a
-significant portion of host-side evasion (15.3% and 25.1% under TCP/22,
-24.5% and 27.3% under UDP/161), underscoring a complex interplay between
-network-level and host-level security failures.<a href="#section-6.4.4-6" class="pilcrow">¶</a></p>
+<p id="section-6.4.4-4"><strong>Evasion signatures predominantly occur within intermediate ASes under
+ICMPv6</strong>, with most EHs showing over 80% of apparently evaded firewalls in
+intermediate ASes. However, this shifts for TCP/UDP: MH, HIP, and Shim6
+exhibit 78.7%, 74.9%, and 76.6% destination AS evasion signatures under
+TCP/22 respectively, potentially reflecting a deliberate policy to avoid
+disrupting TCP/UDP EH processing at the edge.<a href="#section-6.4.4-4" class="pilcrow">¶</a></p>
+<p id="section-6.4.4-5"><strong>Conversely, evasion signatures for Dst and AFrag remain concentrated in
+intermediate ASes</strong> (71.8% and 77.1% under TCP/22 respectively), possibly
+due to centralized upstream filtering that leaves downstream destination
+ASes exposed.<a href="#section-6.4.4-5" class="pilcrow">¶</a></p>
+<p id="section-6.4.4-6"><strong>While most apparently evaded firewalls are on-path</strong>, AFrag and RH2
+exhibit a significant portion of host-side signatures (15.3% and 25.1%
+under TCP/22, 24.5% and 27.3% under UDP/161), which is consistent with a
+complex interplay between network-level and host-level security failures.<a href="#section-6.4.4-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="real-exp">
@@ -3628,20 +3635,19 @@ network-level and host-level security failures.<a href="#section-6.4.4-6" class=
           <h4 id="name-real-world-examples">
 <a href="#section-6.4.5" class="section-number selfRef">6.4.5. </a><a href="#name-real-world-examples" class="section-name selfRef">Real-world Examples</a>
           </h4>
-<p id="section-6.4.5-1">We conducted a small-scale test within a campus network and successfully
-identified firewall evasion issues on two ingress routers (Juniper MX 960
-and H3C CR16K). After consulting with the campus network administrators,
-we learned that the evasion occurred because the ACLs on these routers are
-not configured for deep protocol inspection --- they only checked whether
-the IPv6 next header was TCP or UDP, and allowed all other types to pass.
-This allowed us to successfully establish connections to protected SSH
-services within the campus network by adding Dst and AFrag, effectively
-achieving unauthorized access. We also used other EHs (e.g., ESP) to
-discover live hosts and topology.<a href="#section-6.4.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.4.5-1">A small-scale test within a campus network confirmed firewall evasion on
+two ingress routers (Juniper MX 960 and H3C CR16K). After consultation
+with the campus network administrators, it was established that the evasion
+occurred because the ACLs on these routers are not configured for deep
+protocol inspection --- they only checked whether the IPv6 next header was
+TCP or UDP, and allowed all other types to pass. This made it possible to
+establish connections to protected SSH services within the campus network
+by adding Dst and AFrag, achieving unauthorized access. Other EHs (e.g.,
+ESP) were also used to discover live hosts and topology.<a href="#section-6.4.5-1" class="pilcrow">¶</a></p>
 <p id="section-6.4.5-2">Prior work <span>[<a href="#IPv6-Vul" class="cite xref">IPv6-Vul</a>]</span> has measured firewalls on popular operating systems
 and confirmed that certain versions of FreeBSD firewalls can be evaded via
 two Atomic Fragment headers. These real-world examples provide additional
-validation for the reliability of our measurement results.<a href="#section-6.4.5-2" class="pilcrow">¶</a></p>
+support for the interpretation of the measurement results.<a href="#section-6.4.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3655,31 +3661,32 @@ validation for the reliability of our measurement results.<a href="#section-6.4.
       </h2>
 <p id="section-7-1">This section discusses the security implications of the observations
 presented in this document.<a href="#section-7-1" class="pilcrow">¶</a></p>
-<div id="eh-based-firewall-evasion">
+<div id="potential-eh-based-firewall-evasion">
 <section id="section-7.1">
-        <h3 id="name-eh-based-firewall-evasion">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-eh-based-firewall-evasion" class="section-name selfRef">EH-based Firewall Evasion</a>
+        <h3 id="name-potential-eh-based-firewall">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-potential-eh-based-firewall" class="section-name selfRef">Potential EH-based Firewall Evasion</a>
         </h3>
-<p id="section-7.1-1">Our measurements reveal a widespread EH-based firewall evasion vulnerability
-affecting nearly 5,000 ASes. This vulnerability enables:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.1-1">The measurements reveal widespread potential EH-based firewall evasion
+signatures affecting nearly 5,000 ASes. If confirmed in a given deployment,
+such evasion could enable:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-7.1-2">
 <li id="section-7.1-2.1">
-            <p id="section-7.1-2.1.1"><strong>Stealthy reconnaissance:</strong> Attackers can use EH-carrying probes to
+            <p id="section-7.1-2.1.1"><strong>Stealthy reconnaissance:</strong> Attackers may use EH-carrying probes to
 discover hidden network topologies and live hosts that would otherwise
 be protected by firewalls.<a href="#section-7.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-7.1-2.2">
-            <p id="section-7.1-2.2.1"><strong>Unauthorized access:</strong> Attackers can bypass access control policies
-by appending EHs to TCP/UDP packets, enabling access to internal
-services.<a href="#section-7.1-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-7.1-2.2.1"><strong>Unauthorized access:</strong> Attackers may bypass access control policies
+by appending EHs to TCP/UDP packets, potentially enabling access to
+internal services.<a href="#section-7.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-7.1-2.3">
-            <p id="section-7.1-2.3.1"><strong>Amplification of existing attacks:</strong> EH-based evasion can be combined
+            <p id="section-7.1-2.3.1"><strong>Amplification of existing attacks:</strong> EH-based evasion may be combined
 with other attack techniques, such as source address spoofing for
 reflection/amplification attacks.<a href="#section-7.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-7.1-3">The root causes of this vulnerability include:<a href="#section-7.1-3" class="pilcrow">¶</a></p>
+<p id="section-7.1-3">The potential root causes of these signatures include:<a href="#section-7.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.1-4.1">
             <p id="section-7.1-4.1.1"><strong>Implementation flaws:</strong> Firewalls may have protocol blind spots for
@@ -3969,11 +3976,11 @@ contacting the relevant network operators to inform them of the findings.<a href
       <h2 id="name-measurement-caveats">
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-measurement-caveats" class="section-name selfRef">Measurement Caveats</a>
       </h2>
-<p id="appendix-B-1">Our measurements are subject to several potential limitations that should
+<p id="appendix-B-1">The measurements are subject to several potential limitations that should
 be considered when interpreting the results.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-2"><strong>Limited Response Visibility:</strong>
 Some destination ASes or hosts may not generate ICMPv6 responses, while
-others may process EHs without replying. Since our approach relies on
+others may process EHs without replying. Since this approach relies on
 responses from destination ASes or hosts, the absence of such responses
 may lead to underestimation of EH traversal capability. This limitation
 leads to conservative estimates rather than overestimation.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
@@ -3990,9 +3997,9 @@ may affect a subset of the results, but such effects are inherently random
 and not systematically biased toward specific EH types.<a href="#appendix-B-4" class="pilcrow">¶</a></p>
 <p id="appendix-B-5"><strong>Transient Host Dynamics:</strong>
 During parallel probing, some destination hosts may experience short-term
-changes in availability or port state. Our system incorporates mechanisms
-to identify and exclude unstable hosts, and this limitation does not
-materially impact the overall conclusions.<a href="#appendix-B-5" class="pilcrow">¶</a></p>
+changes in availability or port state. The measurement system incorporates
+mechanisms to identify and exclude unstable hosts, and this limitation does
+not materially impact the overall conclusions.<a href="#appendix-B-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="appendix-reproduce">
@@ -4004,7 +4011,7 @@ materially impact the overall conclusions.<a href="#appendix-B-5" class="pilcrow
 at:
 <a href="https://anonymous.4open.science/r/6Travel">https://anonymous.4open.science/r/6Travel</a>.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 <p id="appendix-C-2">The address dataset and measurement results are also available at the same
-location. Researchers can use 6Travel to reproduce our measurements or
+location. Researchers can use 6Travel to reproduce these measurements or
 conduct similar studies over time to observe changes in the handling of
 packets with IPv6 Extension Headers.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 </section>
