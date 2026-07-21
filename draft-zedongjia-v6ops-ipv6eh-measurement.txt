@@ -21,25 +21,24 @@ Abstract
 
    IPv6 Extension Headers (EHs) are designed to provide protocol
    flexibility and support for emerging features, while maintaining a
-   concise base header and efficient processing.  However, their
-   practical reachability has long been constrained by widespread
-   middlebox interference, and paradoxically, their flexibility
-   introduces significant security risks.
+   concise base header and efficient processing.  In practice, their
+   reachability is affected by middlebox handling along the path, and
+   their flexibility also introduces security considerations.
 
    This document presents observations from a comprehensive, large-scale
    measurement study of IPv6 Extension Header path traversal across more
    than 23,000 autonomous systems.  Using a feedback-driven measurement
    framework called 6Travel, the reachability of 11 common IPv6
    Extension Headers is measured over ICMPv6, TCP, and UDP.  The
-   measurements indicate a notable change: contrary to past observations
-   of heavy filtering, specific Extension Headers now achieve
-   reachability comparable to plain traffic.  Two distinct forms of
-   policy ossification are observed across industry categories, together
-   with widespread potential Extension-Header-based firewall evasion
-   signatures in nearly 5,000 autonomous systems, particularly under TCP
-   and UDP.  These signatures appear consistent with a combination of
-   implementation flaws and security misconfigurations, spanning both
-   on-path and host-side firewalls.
+   measurements indicate a change relative to earlier work: contrary to
+   past observations of heavy filtering, specific Extension Headers now
+   achieve reachability comparable to plain traffic.  Two distinct forms
+   of policy ossification are observed across industry categories,
+   together with widespread potential Extension-Header-based firewall
+   evasion signatures in nearly 5,000 autonomous systems, particularly
+   under TCP and UDP.  These signatures appear consistent with a
+   combination of implementation flaws and security misconfigurations,
+   spanning both on-path and host-side firewalls.
 
 About This Document
 
@@ -131,44 +130,42 @@ Table of Contents
 1.  Introduction
 
    IPv6 has been widely deployed around the world as an alternative to
-   IPv4.  A notable feature of IPv6 is the introduction of Extension
-   Headers (EHs) [RFC7045] [RFC8200].  Located between the IPv6 base
-   header and the upper-layer protocol header, EHs provide IPv6 with a
-   high degree of flexibility, scalability, and support for new core
-   functions of the protocol, while maintaining the simplicity of the
-   base header and efficient processing.  These EHs have been widely
-   applied in various aspects, including Mobile IPv6 (MIPv6) [RFC6275],
-   Segment Routing over IPv6 (SRv6) [RFC8754] [RFC9256], In-band
-   Operations, Administration, and Maintenance (IOAM) [RFC9197], and
-   IPSec [RFC4302] [RFC4303].
+   IPv4.  IPv6 includes Extension Headers (EHs) [RFC7045] [RFC8200].
+   Located between the IPv6 base header and the upper-layer protocol
+   header, EHs provide IPv6 with a high degree of flexibility,
+   scalability, and support for new core functions of the protocol,
+   while maintaining the simplicity of the base header and efficient
+   processing.  EHs have been widely applied in various aspects,
+   including Mobile IPv6 (MIPv6) [RFC6275], Segment Routing over IPv6
+   (SRv6) [RFC8754] [RFC9256], In-band Operations, Administration, and
+   Maintenance (IOAM) [RFC9197], and IPSec [RFC4302] [RFC4303].
 
-   Given the increasingly widespread adoption of EHs, characterizing
-   their reachability has become paramount.  Their path traversal
-   capabilities have been extensively investigated [RFC7872]
-   [Huston-2022] [Custura2024] [JAMES] [FishNet].  Collectively, these
-   studies report that IPv6 packets carrying EHs experience
-   significantly higher drop rates compared to plain IPv6 traffic,
-   highlighting a fragmented and often restrictive deployment landscape
-   across the global Internet.
+   As EHs are increasingly adopted, characterizing their traversal
+   behavior and reachability is important for operational planning and
+   security assessment.  The path traversal capabilities of EHs have
+   been extensively investigated [RFC7872] [Huston-2022] [Custura2024]
+   [JAMES] [FishNet].  Collectively, these studies report that IPv6
+   packets carrying EHs experience higher drop rates compared to plain
+   IPv6 traffic, indicating a fragmented and restrictive deployment
+   landscape across the global Internet.
 
-   However, these studies remain limited in providing a comprehensive
-   understanding of EH reachability.  Prior work has not analyzed the
-   full spectrum of common EHs while achieving extensive Autonomous
-   System (AS) coverage.  Existing studies typically rely on serial
-   traceroute tools or end-to-end measurements, which suffer from
-   substantial resource overhead, limited measurement integrity, and
-   constrained observation scope.
+   A comprehensive understanding of EH reachability across a broad range
+   of headers and networks is still lacking.  The full spectrum of
+   common EHs has not yet been characterized together with extensive
+   Autonomous System (AS) coverage.  Approaches based on serial
+   traceroute or end-to-end probing can incur substantial resource
+   overhead and may constrain measurement scope and consistency.
 
-   Despite their importance, the processing of EHs introduces
-   significant security challenges [RFC9098] [RFC9099].  IPv6 requires
-   all EHs to be processed to identify upper-layer protocols, which may
-   allow attackers to evade firewalls and packet filters that improperly
-   handle or overlook inserted EHs during security enforcement
-   [Atlasis2016] [RFC7112] [FragEvasion].  Moreover, specific EH types
-   harbor inherent architectural flaws exploitable for targeted attacks,
-   such as amplification [RFC5095], overlapping fragment evasion
-   [RFC5722], processing of atomic fragments [RFC6946], information
-   leakage [RFC7739], and Denial of Service (DoS) attacks [RFC8021].
+   EH processing also introduces security challenges [RFC9098]
+   [RFC9099].  IPv6 requires all EHs to be processed to identify upper-
+   layer protocols, which may allow attackers to evade firewalls and
+   packet filters that improperly handle or overlook inserted EHs during
+   security enforcement [Atlasis2016] [RFC7112] [FragEvasion].
+   Moreover, specific EH types are associated with known architectural
+   concerns that can be used for targeted attacks, such as amplification
+   [RFC5095], overlapping fragment evasion [RFC5722], processing of
+   atomic fragments [RFC6946], information leakage [RFC7739], and Denial
+   of Service (DoS) attacks [RFC8021].
 
    Motivated by these observations, this document reports a
    comprehensive, large-scale measurement study of EH path traversal
@@ -177,7 +174,7 @@ Table of Contents
    more than 23,000 ASes, evaluating 11 common EHs over ICMPv6, TCP, and
    UDP.  The key findings are summarized as follows:
 
-   *  *EH Path Traversal Capability:* Specific EHs, notably the
+   *  *EH Path Traversal Capability:* Specific EHs, in particular the
       Destination Options header and the Atomic Fragment header, now
       achieve reachability comparable to plain traffic under TCP and
       UDP, contrary to historical observations of heavy filtering.  This
@@ -245,8 +242,8 @@ Table of Contents
       [RFC6554], the Segment Routing Header (SRH) [RFC8754], and the
       Mobile IPv6 Routing header (type 2) [RFC6275].
 
-   *  *Fragment header:* Essential for IPv6 fragmentation capability
-      when transmitting large packets (e.g., DNS responses).
+   *  *Fragment header:* Used for IPv6 fragmentation when transmitting
+      large packets (e.g., DNS responses).
 
    *  *Encapsulating Security Payload (ESP) [RFC4303] and Authentication
       Header (AH) [RFC4302]:* Used in IPSec to provide data
@@ -282,8 +279,8 @@ Table of Contents
 
    The framework incorporates a global and local rate control strategy
    to mitigate the impact of ICMPv6 rate limiting while maximizing
-   probing efficiency.  It also includes a packet marking mechanism and
-   path-change validation to ensure measurement consistency.
+   probing efficiency.  It also includes a packet marking mechanism to
+   ensure measurement consistency.
 
    6Travel is open-source and publicly available at
    https://anonymous.4open.science/r/6Travel
@@ -422,30 +419,14 @@ Table of Contents
 5.  Observations on EH Path Traversal
 
    A comprehensive path traversal measurement was conducted across all
-   combinations of EHs and upper-layer protocols.  To ensure data
-   quality, a filtering process is applied to identify and discard /48
-   prefixes exhibiting path changes during probing.  Table 3 summarizes
-   the filtered dataset.
-
-          +==========+========================+========+========+
-          | Protocol | Unchanged /48 Prefixes | Rate   | # ASes |
-          +==========+========================+========+========+
-          | ICMPv6   | 6,020,231              | 95.13% | 23,572 |
-          +----------+------------------------+--------+--------+
-          | TCP/22   | 5,963,940              | 94.24% | 23,525 |
-          +----------+------------------------+--------+--------+
-          | UDP/161  | 5,824,972              | 92.04% | 23,509 |
-          +----------+------------------------+--------+--------+
-
-            Table 3: Number of /48 prefixes with path unchanged
-                        observed in probing results
+   combinations of EHs and upper-layer protocols.
 
 5.1.  Destination AS Reachability
 
    The destination AS reachability rate is defined as the proportion of
    /48 prefixes for which probes successfully reach their respective
    destination AS out of the total set of probed prefixes.  The baseline
-   represents EH-free probes per protocol.  Table 4 presents the results
+   represents EH-free probes per protocol.  Table 3 presents the results
    for each EH across protocols.
 
            +==========+============+============+=============+
@@ -476,15 +457,14 @@ Table of Contents
            | ESP      | 70.38      | 70.85      | 70.29       |
            +----------+------------+------------+-------------+
 
-              Table 4: Destination AS reachability rate for
+              Table 3: Destination AS reachability rate for
               each EH across protocols compared to baseline
 
    The results indicate several patterns:
 
    *Dst and AFrag achieve reachability comparable to the baseline*,
-   while Frag experiences significant drops (7.6%--14.8%), which may
-   undermine the utility of fragmentation-dependent services such as
-   DNSSEC.
+   while Frag exhibits drops of 7.6%--14.8%, which may reduce the
+   utility of fragmentation-dependent services such as DNSSEC.
 
    *Routing headers (RHs) exhibit consistently low reachability*, with
    RH2 and RH127 being largely suppressed under TCP/UDP despite moderate
@@ -560,7 +540,7 @@ Table of Contents
    |Travel       |0.96|0.94 |0.62|0.83|0.78|0.86 |0.80|0.81|0.81 |0.77|0.72|
    +-------------+----+-----+----+----+----+-----+----+----+-----+----+----+
 
-       Table 5: Relative destination AS reachability under ICMPv6 by
+       Table 4: Relative destination AS reachability under ICMPv6 by
                              industry category
 
    +=============+====+=====+====+====+====+=====+====+====+=====+====+====+
@@ -601,7 +581,7 @@ Table of Contents
    |Travel       |1.03|1.03 |0.79|0.98|0.98|1.01 |1.04|1.07|1.07 |0.97|0.98|
    +-------------+----+-----+----+----+----+-----+----+----+-----+----+----+
 
-       Table 6: Relative destination AS reachability under TCP/22 by
+       Table 5: Relative destination AS reachability under TCP/22 by
                              industry category
 
    +=============+====+=====+====+====+====+=====+====+====+=====+====+====+
@@ -642,33 +622,32 @@ Table of Contents
    |Travel       |1.03|1.02 |0.67|0.97|0.94|1.00 |0.97|1.33|1.33 |0.87|1.18|
    +-------------+----+-----+----+----+----+-----+----+----+-----+----+----+
 
-       Table 7: Relative destination AS reachability under UDP/161 by
+       Table 6: Relative destination AS reachability under UDP/161 by
                              industry category
 
-   The analysis reveals two distinct forms of policy ossification across
+   Two distinct forms of policy ossification are observed across
    industry categories:
 
-   *Availability-oriented ossification:* In industry categories like
+   *Availability-oriented ossification:* In industry categories such as
    Travel, Construction, Media, and Manufacturing, reachability for
-   certain EHs (e.g., MH, HIP, AH/ESP) significantly exceeds the
-   baseline under TCP/UDP.  This suggests a permissive ossification,
-   where inspection policies are fixed to prioritize service
-   availability.  While Media and Construction categories are generally
-   permissive, they consistently suppress Routing headers, reflecting an
-   ossified mitigation strategy against Routing header risks.
+   certain EHs (e.g., MH, HIP, AH/ESP) exceeds the baseline under TCP/
+   UDP.  This is consistent with a permissive ossification, where
+   inspection policies are fixed to prioritize service availability.
+   While the Media and Construction categories are generally permissive,
+   they consistently suppress Routing headers, which is consistent with
+   a fixed mitigation strategy for Routing header risks.
 
-   *Security-oriented ossification:* The Government category
-   demonstrates a bifurcated ossification: it maintains reachability
-   comparable to the baseline under ICMPv6 and UDP, yet enforces a
-   strict filtering stance for almost all EHs under TCP, indicating a
-   highly restrictive and legacy-driven security posture.  This approach
-   secures the boundary but hinders IPv6 architectural evolution through
-   rigid filtering.
+   *Security-oriented ossification:* The Government category exhibits a
+   bifurcated pattern: it maintains reachability comparable to the
+   baseline under ICMPv6 and UDP, yet applies strict filtering for
+   almost all EHs under TCP, consistent with a restrictive and legacy-
+   driven security posture.  This approach secures the boundary but
+   hinders IPv6 architectural evolution through rigid filtering.
 
    *Protocol-neutral posture:* The Health Care category maintains
    reachability consistently near the baseline across both TCP and UDP,
-   reflecting minimal active filtering, suggesting a legacy of minimal
-   middlebox interference.
+   consistent with minimal active filtering and limited middlebox
+   interference.
 
 6.  Observations on Potential EH-based Firewall Evasion
 
@@ -733,8 +712,7 @@ Table of Contents
    To identify which EHs may evade firewalls, the results of EH-carrying
    probes are compared with those of EH-free probes.  The design of
    6Travel minimizes the time gap between EH-carrying and EH-free
-   probing, and results affected by path changes are effectively
-   detected and excluded.
+   probing.
 
    The following response types are defined:
 
@@ -755,7 +733,7 @@ Table of Contents
        | SNMPv3 Response                               |          |
        +-----------------------------------------------+----------+
 
-                Table 8: Response types and their notation
+                Table 7: Response types and their notation
 
    Four rules are defined to determine whether an EH-carrying probe type
    exhibits a response pattern consistent with firewall evasion:
@@ -786,19 +764,18 @@ Table of Contents
 
 6.4.1.  Overall Impact
 
-          +==========+=====================+====================+
-          | Protocol | # /48 Prefixes with | # ASes with        |
-          |          | Evasion Signatures  | Evasion Signatures |
-          +==========+=====================+====================+
-          | ICMPv6   | 93,630 (1.6%)       | 1,154 (4.9%)       |
-          +----------+---------------------+--------------------+
-          | TCP/22   | 218,954 (3.7%)      | 4,961 (21.1%)      |
-          +----------+---------------------+--------------------+
-          | UDP/161  | 195,175 (3.4%)      | 4,468 (19.0%)      |
-          +----------+---------------------+--------------------+
+         +==========+=========================+=================+
+         | Protocol | # Affected /48 Prefixes | # Affected ASes |
+         +==========+=========================+=================+
+         | ICMPv6   | 93,630 (1.6%)           | 1,154 (4.9%)    |
+         +----------+-------------------------+-----------------+
+         | TCP/22   | 218,954 (3.7%)          | 4,961 (21.1%)   |
+         +----------+-------------------------+-----------------+
+         | UDP/161  | 195,175 (3.4%)          | 4,468 (19.0%)   |
+         +----------+-------------------------+-----------------+
 
-                Table 9: Overall extent of EH-based firewall
-                             evasion signatures
+           Table 8: Overall extent of EH-based firewall evasion
+                                signatures
 
    While 93,630 /48 prefixes (1,154 ASes) exhibit evasion signatures
    under ICMPv6, the count nearly doubles under TCP/UDP, reaching
@@ -809,7 +786,7 @@ Table of Contents
 
 6.4.2.  Breakdown by EH Type
 
-   Table 10 presents the number of /48 prefixes exhibiting EH-based
+   Table 9 presents the number of /48 prefixes exhibiting EH-based
    evasion signatures across different EH types and protocols.
 
              +=======+============+============+=============+
@@ -836,26 +813,26 @@ Table of Contents
              | ESP   | 79.3       | 158.2      | 150.2       |
              +-------+------------+------------+-------------+
 
-                    Table 10: Number of /48 prefixes (in
+                    Table 9: Number of /48 prefixes (in
                  thousands) with EH-based firewall evasion
                          signatures across EH types
 
-   Evasion signatures vary significantly across EH types, which is
-   consistent with diverse underlying causes:
+   Evasion signatures vary across EH types, which is consistent with
+   diverse underlying causes:
 
    *  *AH and ESP* consistently exhibit the highest evasion-signature
-      rates, likely due to lenient inspection of IPSec-related traffic
-      for service continuity.
+      rates, which is consistent with lenient inspection of IPSec-
+      related traffic for service continuity.
 
    *  *MH, HIP, and Shim6* --- which are not defined in [RFC8200] ---
-      show markedly higher evasion under TCP/UDP than Dst or RHs,
-      suggesting that firewalls may fail to account for these less
-      common headers, creating security blind spots.
+      show higher evasion signatures under TCP/UDP than Dst or RHs,
+      which is consistent with firewalls not accounting for these less
+      common headers, leaving security blind spots.
 
-   *  The spatial distribution of evaded firewalls further distinguishes
-      these patterns: evasion predominantly occurs within intermediate
-      ASes under ICMPv6, while this shifts toward destination ASes for
-      MH, HIP, and Shim6 under TCP/UDP.
+   *  The spatial distribution of apparently evaded firewalls further
+      distinguishes these patterns: evasion signatures predominantly
+      occur within intermediate ASes under ICMPv6, while this shifts
+      toward destination ASes for MH, HIP, and Shim6 under TCP/UDP.
 
 6.4.3.  Breakdown by Industry Category
 
@@ -863,145 +840,142 @@ Table of Contents
    industry category for each protocol.  A /48 prefix or AS is counted
    multiple times if it belongs to multiple categories.
 
-      +===================+====================+====================+
-      | Industry Category | # /48s with        | # ASes with        |
-      |                   | Evasion Signatures | Evasion Signatures |
-      +===================+====================+====================+
-      | Agriculture       | 3 (0.2%)           | 2 (1.6%)           |
-      +-------------------+--------------------+--------------------+
-      | Nonprofits        | 18 (0.5%)          | 14 (2.8%)          |
-      +-------------------+--------------------+--------------------+
-      | Tech              | 93,005 (1.6%)      | 985 (5.9%)         |
-      +-------------------+--------------------+--------------------+
-      | Construction      | 10 (0.1%)          | 9 (1.5%)           |
-      +-------------------+--------------------+--------------------+
-      | Education         | 65 (0.7%)          | 28 (2.6%)          |
-      +-------------------+--------------------+--------------------+
-      | Finance           | 16 (0.2%)          | 11 (2.7%)          |
-      +-------------------+--------------------+--------------------+
-      | Shipping          | 10 (0.0%)          | 7 (3.3%)           |
-      +-------------------+--------------------+--------------------+
-      | Government        | 36 (0.0%)          | 10 (2.1%)          |
-      +-------------------+--------------------+--------------------+
-      | Health Care       | 3 (0.4%)           | 2 (1.1%)           |
-      +-------------------+--------------------+--------------------+
-      | Manufacturing     | 51 (1.2%)          | 12 (2.2%)          |
-      +-------------------+--------------------+--------------------+
-      | Media             | 2,293 (2.3%)       | 42 (3.7%)          |
-      +-------------------+--------------------+--------------------+
-      | Entertainment     | 5 (0.5%)           | 4 (2.3%)           |
-      +-------------------+--------------------+--------------------+
-      | Other             | 394 (0.2%)         | 103 (2.9%)         |
-      +-------------------+--------------------+--------------------+
-      | Retail            | 1,398 (0.6%)       | 39 (3.1%)          |
-      +-------------------+--------------------+--------------------+
-      | Service           | 241 (0.0%)         | 50 (2.6%)          |
-      +-------------------+--------------------+--------------------+
-      | Travel            | 6 (0.9%)           | 4 (2.7%)           |
-      +-------------------+--------------------+--------------------+
-      | Utilities         | 7 (0.4%)           | 5 (3.0%)           |
-      +-------------------+--------------------+--------------------+
-      | *Total*           | *93,630 (1.6%)*    | *1,154 (4.9%)*     |
-      +-------------------+--------------------+--------------------+
+         +===================+=================+=================+
+         | Industry Category | # Affected /48s | # Affected ASes |
+         +===================+=================+=================+
+         | Agriculture       | 3 (0.2%)        | 2 (1.6%)        |
+         +-------------------+-----------------+-----------------+
+         | Nonprofits        | 18 (0.5%)       | 14 (2.8%)       |
+         +-------------------+-----------------+-----------------+
+         | Tech              | 93,005 (1.6%)   | 985 (5.9%)      |
+         +-------------------+-----------------+-----------------+
+         | Construction      | 10 (0.1%)       | 9 (1.5%)        |
+         +-------------------+-----------------+-----------------+
+         | Education         | 65 (0.7%)       | 28 (2.6%)       |
+         +-------------------+-----------------+-----------------+
+         | Finance           | 16 (0.2%)       | 11 (2.7%)       |
+         +-------------------+-----------------+-----------------+
+         | Shipping          | 10 (0.0%)       | 7 (3.3%)        |
+         +-------------------+-----------------+-----------------+
+         | Government        | 36 (0.0%)       | 10 (2.1%)       |
+         +-------------------+-----------------+-----------------+
+         | Health Care       | 3 (0.4%)        | 2 (1.1%)        |
+         +-------------------+-----------------+-----------------+
+         | Manufacturing     | 51 (1.2%)       | 12 (2.2%)       |
+         +-------------------+-----------------+-----------------+
+         | Media             | 2,293 (2.3%)    | 42 (3.7%)       |
+         +-------------------+-----------------+-----------------+
+         | Entertainment     | 5 (0.5%)        | 4 (2.3%)        |
+         +-------------------+-----------------+-----------------+
+         | Other             | 394 (0.2%)      | 103 (2.9%)      |
+         +-------------------+-----------------+-----------------+
+         | Retail            | 1,398 (0.6%)    | 39 (3.1%)       |
+         +-------------------+-----------------+-----------------+
+         | Service           | 241 (0.0%)      | 50 (2.6%)       |
+         +-------------------+-----------------+-----------------+
+         | Travel            | 6 (0.9%)        | 4 (2.7%)        |
+         +-------------------+-----------------+-----------------+
+         | Utilities         | 7 (0.4%)        | 5 (3.0%)        |
+         +-------------------+-----------------+-----------------+
+         | *Total*           | *93,630 (1.6%)* | *1,154 (4.9%)*  |
+         +-------------------+-----------------+-----------------+
 
-        Table 11: EH-based firewall evasion signatures under ICMPv6
-                            by industry category
+            Table 10: EH-based firewall evasion signatures under
+                        ICMPv6 by industry category
 
-      +===================+====================+====================+
-      | Industry Category | # /48s with        | # ASes with        |
-      |                   | Evasion Signatures | Evasion Signatures |
-      +===================+====================+====================+
-      | Agriculture       | 79 (4.2%)          | 17 (14.2%)         |
-      +-------------------+--------------------+--------------------+
-      | Nonprofits        | 248 (7.0%)         | 81 (16.5%)         |
-      +-------------------+--------------------+--------------------+
-      | Tech              | 210,516 (3.7%)     | 4,046 (24.3%)      |
-      +-------------------+--------------------+--------------------+
-      | Construction      | 216 (2.5%)         | 104 (17.5%)        |
-      +-------------------+--------------------+--------------------+
-      | Education         | 822 (9.1%)         | 211 (19.5%)        |
-      +-------------------+--------------------+--------------------+
-      | Finance           | 198 (2.4%)         | 55 (13.7%)         |
-      +-------------------+--------------------+--------------------+
-      | Shipping          | 76 (0.1%)          | 36 (17.0%)         |
-      +-------------------+--------------------+--------------------+
-      | Government        | 204 (0.1%)         | 67 (14.3%)         |
-      +-------------------+--------------------+--------------------+
-      | Health Care       | 85 (10.5%)         | 25 (13.4%)         |
-      +-------------------+--------------------+--------------------+
-      | Manufacturing     | 636 (13.9%)        | 92 (16.9%)         |
-      +-------------------+--------------------+--------------------+
-      | Media             | 13,690 (14.4%)     | 254 (22.5%)        |
-      +-------------------+--------------------+--------------------+
-      | Entertainment     | 66 (6.7%)          | 21 (12.3%)         |
-      +-------------------+--------------------+--------------------+
-      | Other             | 7,100 (2.8%)       | 435 (12.4%)        |
-      +-------------------+--------------------+--------------------+
-      | Retail            | 5,306 (2.4%)       | 222 (17.5%)        |
-      +-------------------+--------------------+--------------------+
-      | Service           | 4,141 (0.8%)       | 338 (17.7%)        |
-      +-------------------+--------------------+--------------------+
-      | Travel            | 61 (9.2%)          | 18 (12.4%)         |
-      +-------------------+--------------------+--------------------+
-      | Utilities         | 94 (5.7%)          | 30 (18.2%)         |
-      +-------------------+--------------------+--------------------+
-      | *Total*           | *218,954 (3.7%)*   | *4,961 (21.1%)*    |
-      +-------------------+--------------------+--------------------+
+        +===================+==================+=================+
+        | Industry Category | # Affected /48s  | # Affected ASes |
+        +===================+==================+=================+
+        | Agriculture       | 79 (4.2%)        | 17 (14.2%)      |
+        +-------------------+------------------+-----------------+
+        | Nonprofits        | 248 (7.0%)       | 81 (16.5%)      |
+        +-------------------+------------------+-----------------+
+        | Tech              | 210,516 (3.7%)   | 4,046 (24.3%)   |
+        +-------------------+------------------+-----------------+
+        | Construction      | 216 (2.5%)       | 104 (17.5%)     |
+        +-------------------+------------------+-----------------+
+        | Education         | 822 (9.1%)       | 211 (19.5%)     |
+        +-------------------+------------------+-----------------+
+        | Finance           | 198 (2.4%)       | 55 (13.7%)      |
+        +-------------------+------------------+-----------------+
+        | Shipping          | 76 (0.1%)        | 36 (17.0%)      |
+        +-------------------+------------------+-----------------+
+        | Government        | 204 (0.1%)       | 67 (14.3%)      |
+        +-------------------+------------------+-----------------+
+        | Health Care       | 85 (10.5%)       | 25 (13.4%)      |
+        +-------------------+------------------+-----------------+
+        | Manufacturing     | 636 (13.9%)      | 92 (16.9%)      |
+        +-------------------+------------------+-----------------+
+        | Media             | 13,690 (14.4%)   | 254 (22.5%)     |
+        +-------------------+------------------+-----------------+
+        | Entertainment     | 66 (6.7%)        | 21 (12.3%)      |
+        +-------------------+------------------+-----------------+
+        | Other             | 7,100 (2.8%)     | 435 (12.4%)     |
+        +-------------------+------------------+-----------------+
+        | Retail            | 5,306 (2.4%)     | 222 (17.5%)     |
+        +-------------------+------------------+-----------------+
+        | Service           | 4,141 (0.8%)     | 338 (17.7%)     |
+        +-------------------+------------------+-----------------+
+        | Travel            | 61 (9.2%)        | 18 (12.4%)      |
+        +-------------------+------------------+-----------------+
+        | Utilities         | 94 (5.7%)        | 30 (18.2%)      |
+        +-------------------+------------------+-----------------+
+        | *Total*           | *218,954 (3.7%)* | *4,961 (21.1%)* |
+        +-------------------+------------------+-----------------+
 
-        Table 12: EH-based firewall evasion signatures under TCP/22
-                            by industry category
+           Table 11: EH-based firewall evasion signatures under
+                       TCP/22 by industry category
 
-      +===================+====================+====================+
-      | Industry Category | # /48s with        | # ASes with        |
-      |                   | Evasion Signatures | Evasion Signatures |
-      +===================+====================+====================+
-      | Agriculture       | 78 (4.1%)          | 16 (13.3%)         |
-      +-------------------+--------------------+--------------------+
-      | Nonprofits        | 207 (5.8%)         | 77 (15.7%)         |
-      +-------------------+--------------------+--------------------+
-      | Tech              | 187,933 (3.4%)     | 3,658 (22.0%)      |
-      +-------------------+--------------------+--------------------+
-      | Construction      | 157 (1.8%)         | 84 (14.2%)         |
-      +-------------------+--------------------+--------------------+
-      | Education         | 853 (9.4%)         | 185 (17.0%)        |
-      +-------------------+--------------------+--------------------+
-      | Finance           | 131 (1.6%)         | 47 (11.6%)         |
-      +-------------------+--------------------+--------------------+
-      | Shipping          | 56 (0.0%)          | 31 (14.8%)         |
-      +-------------------+--------------------+--------------------+
-      | Government        | 181 (0.1%)         | 60 (12.9%)         |
-      +-------------------+--------------------+--------------------+
-      | Health Care       | 77 (9.6%)          | 29 (15.9%)         |
-      +-------------------+--------------------+--------------------+
-      | Manufacturing     | 537 (12.1%)        | 64 (11.7%)         |
-      +-------------------+--------------------+--------------------+
-      | Media             | 9,915 (10.5%)      | 210 (18.7%)        |
-      +-------------------+--------------------+--------------------+
-      | Entertainment     | 50 (5.1%)          | 16 (9.2%)          |
-      +-------------------+--------------------+--------------------+
-      | Other             | 6,014 (2.4%)       | 385 (10.9%)        |
-      +-------------------+--------------------+--------------------+
-      | Retail            | 2,037 (0.9%)       | 170 (13.5%)        |
-      +-------------------+--------------------+--------------------+
-      | Service           | 929 (0.2%)         | 277 (14.5%)        |
-      +-------------------+--------------------+--------------------+
-      | Travel            | 25 (4.2%)          | 11 (7.6%)          |
-      +-------------------+--------------------+--------------------+
-      | Utilities         | 75 (4.6%)          | 19 (11.4%)         |
-      +-------------------+--------------------+--------------------+
-      | *Total*           | *195,175 (3.4%)*   | *4,468 (19.0%)*    |
-      +-------------------+--------------------+--------------------+
+        +===================+==================+=================+
+        | Industry Category | # Affected /48s  | # Affected ASes |
+        +===================+==================+=================+
+        | Agriculture       | 78 (4.1%)        | 16 (13.3%)      |
+        +-------------------+------------------+-----------------+
+        | Nonprofits        | 207 (5.8%)       | 77 (15.7%)      |
+        +-------------------+------------------+-----------------+
+        | Tech              | 187,933 (3.4%)   | 3,658 (22.0%)   |
+        +-------------------+------------------+-----------------+
+        | Construction      | 157 (1.8%)       | 84 (14.2%)      |
+        +-------------------+------------------+-----------------+
+        | Education         | 853 (9.4%)       | 185 (17.0%)     |
+        +-------------------+------------------+-----------------+
+        | Finance           | 131 (1.6%)       | 47 (11.6%)      |
+        +-------------------+------------------+-----------------+
+        | Shipping          | 56 (0.0%)        | 31 (14.8%)      |
+        +-------------------+------------------+-----------------+
+        | Government        | 181 (0.1%)       | 60 (12.9%)      |
+        +-------------------+------------------+-----------------+
+        | Health Care       | 77 (9.6%)        | 29 (15.9%)      |
+        +-------------------+------------------+-----------------+
+        | Manufacturing     | 537 (12.1%)      | 64 (11.7%)      |
+        +-------------------+------------------+-----------------+
+        | Media             | 9,915 (10.5%)    | 210 (18.7%)     |
+        +-------------------+------------------+-----------------+
+        | Entertainment     | 50 (5.1%)        | 16 (9.2%)       |
+        +-------------------+------------------+-----------------+
+        | Other             | 6,014 (2.4%)     | 385 (10.9%)     |
+        +-------------------+------------------+-----------------+
+        | Retail            | 2,037 (0.9%)     | 170 (13.5%)     |
+        +-------------------+------------------+-----------------+
+        | Service           | 929 (0.2%)       | 277 (14.5%)     |
+        +-------------------+------------------+-----------------+
+        | Travel            | 25 (4.2%)        | 11 (7.6%)       |
+        +-------------------+------------------+-----------------+
+        | Utilities         | 75 (4.6%)        | 19 (11.4%)      |
+        +-------------------+------------------+-----------------+
+        | *Total*           | *195,175 (3.4%)* | *4,468 (19.0%)* |
+        +-------------------+------------------+-----------------+
 
-            Table 13: EH-based firewall evasion signatures under
-                        UDP/161 by industry category
+           Table 12: EH-based firewall evasion signatures under
+                       UDP/161 by industry category
 
-   Industry-category-wise, the Tech category dominates the evasion-
-   signature landscape, followed by Media and Retail, which show
-   significant susceptibility, particularly under TCP/UDP.
+   Industry-category-wise, the Tech category accounts for the largest
+   share of evasion signatures, followed by Media and Retail, which also
+   show elevated levels, particularly under TCP/UDP.
 
 6.4.4.  On-path vs. Host-side Evasion
 
-   Table 14 presents the spatial distribution of apparently evaded
+   Table 13 presents the spatial distribution of apparently evaded
    firewalls across EH types and protocols.  For each combination, the
    percentage of apparently evaded firewalls located in intermediate
    ASes versus destination ASes is reported, together with the
@@ -1072,29 +1046,27 @@ Table of Contents
     | UDP/161  |ESP  | 59.5         | 40.5        |97.2   | 2.8       |
     +----------+-----+--------------+-------------+-------+-----------+
 
-       Table 14: Spatial distribution of apparently evaded firewalls
+       Table 13: Spatial distribution of apparently evaded firewalls
                        across EH types and protocols
 
-   Several key patterns emerge from this analysis:
+   Several patterns emerge from this analysis:
 
    *Evasion signatures predominantly occur within intermediate ASes
    under ICMPv6*, with most EHs showing over 80% of apparently evaded
-   firewalls in intermediate ASes.  However, this shifts for TCP/UDP:
-   MH, HIP, and Shim6 exhibit 78.7%, 74.9%, and 76.6% destination AS
-   evasion signatures under TCP/22 respectively, potentially reflecting
-   a deliberate policy to avoid disrupting TCP/UDP EH processing at the
-   edge.
+   firewalls in intermediate ASes.  This shifts for TCP/UDP: MH, HIP,
+   and Shim6 exhibit 78.7%, 74.9%, and 76.6% destination AS evasion
+   signatures under TCP/22 respectively, which is consistent with a
+   policy to avoid disrupting TCP/UDP EH processing at the edge.
 
    *Conversely, evasion signatures for Dst and AFrag remain concentrated
    in intermediate ASes* (71.8% and 77.1% under TCP/22 respectively),
-   possibly due to centralized upstream filtering that leaves downstream
-   destination ASes exposed.
+   which may be due to centralized upstream filtering that leaves
+   downstream destination ASes reachable.
 
    *While most apparently evaded firewalls are on-path*, AFrag and RH2
-   exhibit a significant portion of host-side signatures (15.3% and
-   25.1% under TCP/22, 24.5% and 27.3% under UDP/161), which is
-   consistent with a complex interplay between network-level and host-
-   level security failures.
+   exhibit a larger portion of host-side signatures (15.3% and 25.1%
+   under TCP/22, 24.5% and 27.3% under UDP/161), which is consistent
+   with a combination of network-level and host-level factors.
 
 6.4.5.  Real-world Examples
 
@@ -1122,7 +1094,7 @@ Table of Contents
 
 7.1.  Potential EH-based Firewall Evasion
 
-   The measurements reveal widespread potential EH-based firewall
+   The measurements indicate widespread potential EH-based firewall
    evasion signatures affecting nearly 5,000 ASes.  If confirmed in a
    given deployment, such evasion could enable:
 
@@ -1436,9 +1408,9 @@ Appendix B.  Measurement Caveats
 
    *Transient Host Dynamics:* During parallel probing, some destination
    hosts may experience short-term changes in availability or port
-   state.  The measurement system incorporates mechanisms to identify
-   and exclude unstable hosts, and this limitation does not materially
-   impact the overall conclusions.
+   state.  Such transient effects are expected to be limited and are not
+   systematically biased toward specific EH types, and therefore do not
+   materially impact the overall conclusions.
 
 Appendix C.  Reproducing the Measurements
 
