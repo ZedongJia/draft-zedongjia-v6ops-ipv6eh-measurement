@@ -269,7 +269,7 @@ considerations and measurement caveats, respectively.
 
 {::boilerplate bcp14-tagged}
 
-# IPv6 Extension Headers
+# IPv6 Extension Headers {#background}
 
 Extension Headers are optional headers that may appear between the IPv6
 base header and the transport layer. They are designed to extend the
@@ -304,13 +304,13 @@ have defined the following EHs:
   header {{RFC5533}}:** Designed for locator/identifier separation and
   multi-homing support, respectively.
 
-# Measurement Methodology
+# Measurement Methodology {#methodology}
 
 This section describes the measurement methodology, including the
 measurement framework, address dataset, and the selection of EHs and
 upper-layer protocols.
 
-## Measurement Framework
+## Measurement Framework {#framework}
 
 The measurements use 6Travel {{6Travel}}, a feedback-driven measurement
 framework designed
@@ -333,7 +333,7 @@ measurement consistency.
 6Travel is open-source and publicly available at
 [https://anonymous.4open.science/r/6Travel](https://anonymous.4open.science/r/6Travel).
 
-## Measurement Setup
+## Measurement Setup {#setup}
 
 The EH path traversal measurement was conducted from a single vantage
 point (VP) in an education network. The network is confirmed to have no
@@ -348,7 +348,7 @@ Additionally, to minimize interference with both the local and target
 networks, the hop limits are set to 8--30. The probing rate is configured
 to 50,000 packets per second.
 
-## Address Dataset
+## Address Dataset {#dataset}
 
 To ensure a representative and large-scale perspective, target
 addresses are aggregated from three complementary sources, as detailed in
@@ -375,7 +375,7 @@ length represents the shortest globally routable prefix length commonly
 announced in the BGP system. Industry categories are determined using
 ASdb {{ASdb}}.
 
-## Selection of EHs and Upper-layer Protocols
+## Selection of EHs and Upper-layer Protocols {#eh-selection}
 
 To evaluate the path traversal capability of EHs, the EHs
 depicted in {{tab-eh}} are selected, covering six application scenarios: data
@@ -410,12 +410,12 @@ reachability for the Hop-by-Hop Options header {{RFC7872}} {{Huston-2022}}
 {{Custura2024}} {{JAMES}} {{FishNet}}, it is excluded from the path
 traversal measurements as its limited reachability is already well-documented.
 
-# Observations on EH Path Traversal
+# Observations on EH Path Traversal {#path-traversal}
 
 A comprehensive path traversal measurement was conducted across all
 combinations of EHs and upper-layer protocols.
 
-## Destination AS Reachability
+## Destination AS Reachability {#dest-as-reachability}
 
 The destination AS reachability rate is defined as the proportion
 of /48 prefixes for which probes successfully reach their respective
@@ -464,7 +464,7 @@ plain traffic. While this enables the practical deployment of EH-based
 applications (e.g., MIPv6, IPSec), it simultaneously expands the network
 attack surface for EH-based exploits.
 
-## Reachability Across Industry Categories
+## Reachability Across Industry Categories {#ic-reachability}
 
 To dissect the security-reachability tradeoff across diverse network
 environments, the results are categorized by industry category (IC) for
@@ -563,7 +563,7 @@ architectural evolution through rigid filtering.
 reachability consistently near the baseline across both TCP and UDP,
 consistent with minimal active filtering and limited middlebox interference.
 
-# Observations on Potential EH-based Firewall Evasion
+# Observations on Potential EH-based Firewall Evasion {#evasion}
 
 Building upon the measurement results presented in {{path-traversal}},
 several EHs exhibit destination reachability that exceeds the established
@@ -571,7 +571,7 @@ baseline. Such discrepancies are consistent with potential firewall
 evasion. This section presents a threat model, identifies threat scenarios,
 and quantifies the extent of the potential evasion observed.
 
-## Threat Model
+## Threat Model {#threat-model}
 
 The threat model considers a remote adversary located outside the victim
 network, capable of crafting and sending arbitrary IPv6 packets, including
@@ -596,7 +596,7 @@ reconnaissance to map hidden topologies and live hosts, and (ii) violate
 access-control policies by accessing internal services protected by
 firewalls.
 
-## Threat Scenarios
+## Threat Scenarios {#threat-scenarios}
 
 Building upon related work {{IPv6-Vul}} and validated through local
 proof-of-concept demonstrations (see {{real-exp}}), two primary
@@ -617,7 +617,7 @@ so as not to interfere with the target's transport-layer protocol parsing,
 yet they may cause firewalls to skip deep packet inspection, potentially
 enabling unauthorized access to services that would otherwise be protected.
 
-## Identifying Potential EH-based Firewall Evasion
+## Identifying Potential EH-based Firewall Evasion {#identifying-evasion}
 
 To identify which EHs may evade firewalls, the results of EH-carrying probes
 are compared with those of EH-free probes. The design of 6Travel minimizes
@@ -653,7 +653,7 @@ For Rules 1--3, the addresses of the firewall devices apparently evaded via
 EHs can be further identified by extracting information from the returned
 ICMPv6 Destination Unreachable messages.
 
-## Extent of Potential Firewall Evasion
+## Extent of Potential Firewall Evasion {#evasion-extent}
 
 The number of /48 prefixes and ASes exhibiting evasion signatures across
 different industry categories is quantified to evaluate the extent of
@@ -846,7 +846,7 @@ exhibit a larger portion of host-side signatures (15.3% and 25.1%
 under TCP/22, 24.5% and 27.3% under UDP/161), which is consistent with a
 combination of network-level and host-level factors.
 
-### Real-world Examples
+### Real-world Examples {#real-exp}
 
 A small-scale test within a campus network confirmed firewall evasion on
 two ingress routers (Juniper MX 960 and H3C CR16K). After consultation
@@ -863,7 +863,7 @@ and confirmed that certain versions of FreeBSD firewalls can be evaded via
 two Atomic Fragment headers. These real-world examples provide additional
 support for the interpretation of the measurement results.
 
-# Security Considerations
+# Security Considerations {#security}
 
 This section discusses the security implications of the observations
 presented in this document.
@@ -928,7 +928,7 @@ This document has no IANA actions.
 
 --- back
 
-# Ethical Considerations
+# Ethical Considerations {#appendix-ethics}
 
 We strictly adhere to the ethical guidelines of network measurement and
 fully consider the measurement impact, benign probing, and anonymity.
@@ -966,7 +966,7 @@ addressed the identified firewall evasion issues. For other ASes where
 potential firewall vulnerabilities were observed, we are actively
 contacting the relevant network operators to inform them of the findings.
 
-# Measurement Caveats
+# Measurement Caveats {#appendix-caveats}
 
 The measurements are subject to several potential limitations that should
 be considered when interpreting the results.
@@ -997,7 +997,7 @@ changes in availability or port state. Such transient effects are expected
 to be limited and are not systematically biased toward specific EH types,
 and therefore do not materially impact the overall conclusions.
 
-# Reproducing the Measurements
+# Reproducing the Measurements {#appendix-reproduce}
 
 The 6Travel measurement framework is open-source and publicly available
 at:
@@ -1009,7 +1009,6 @@ conduct similar studies over time to observe changes in the handling of
 packets with IPv6 Extension Headers.
 
 # Acknowledgments
-
 {:numbered="false"}
 
 We would like to thank Daguo Cheng, Chentian Wei, Zhaoan Wang, Kun Guo, and Chenyi Liu
