@@ -4,16 +4,16 @@
 
 This is the working area for the individual Internet-Draft, "Observations on the Reachability and Evasion of Packets with IPv6 Extension Headers on the Internet".
 
-* [Editor's Copy](https://ZedongJia.github.io/draft-zedongjia-v6ops-6travel/#go.draft-zedongjia-v6ops-6travel.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-zedongjia-v6ops-6travel)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-zedongjia-v6ops-6travel)
-* [Compare Editor's Copy to Individual Draft](https://ZedongJia.github.io/draft-zedongjia-v6ops-6travel/#go.draft-zedongjia-v6ops-6travel.diff)
+* [Editor's Copy](https://ZedongJia.github.io/draft-zedongjia-v6ops-ipv6eh-measurement/#go.draft-zedongjia-v6ops-ipv6eh-measurement.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-zedongjia-v6ops-ipv6eh-measurement)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-zedongjia-v6ops-ipv6eh-measurement)
+* [Compare Editor's Copy to Individual Draft](https://ZedongJia.github.io/draft-zedongjia-v6ops-ipv6eh-measurement/#go.draft-zedongjia-v6ops-ipv6eh-measurement.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/ZedongJia/draft-zedongjia-v6ops-6travel/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/ZedongJia/draft-zedongjia-v6ops-ipv6eh-measurement/blob/main/CONTRIBUTING.md).
 
 The contributing file also has tips on how to make contributions, if you
 don't already know how to do that.
