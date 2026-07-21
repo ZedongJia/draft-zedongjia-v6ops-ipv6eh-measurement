@@ -930,41 +930,36 @@ This document has no IANA actions.
 
 # Ethical Considerations {#appendix-ethics}
 
-We strictly adhere to the ethical guidelines of network measurement and
-fully consider the measurement impact, benign probing, and anonymity.
+The measurements strictly adhere to the ethical guidelines of network
+measurement, with full consideration of measurement impact, benign probing,
+and anonymity.
 
 **Measurement Impact:**
 In compliance with the standards outlined in {{RFC4443}}, the number of
 packets sent to each target address is limited to one per second, and each
-probe is only sent once per hop. We distribute probes across multiple
+probe is only sent once per hop. Probes are distributed across multiple
 addresses by randomizing target addresses, instead of repeatedly targeting
-a single address. Additionally, we impose an overall rate limit of 50K
-packets per second, which effectively reduces the impact on both the
+a single address. Additionally, an overall rate limit of 50K
+packets per second is imposed, which reduces the impact on both the
 vantage point network and the target network.
 
 **Benign Probing:**
-All probes are constructed using standard-compliant protocols. We do not
-exploit any vulnerabilities or craft malicious payloads. The probes do not
-carry harmful data, and the responses do not contain personally
-identifiable or sensitive information. For TCP/22, we perform only
-half-open probing without establishing full connections. For UDP/161, we
-send SNMPv3 Get Requests without any follow-up interaction.
+All probes are constructed using standard-compliant protocols. No
+vulnerabilities are exploited and no malicious payloads are crafted. The
+probes do not carry harmful data, and the responses do not contain
+personally identifiable or sensitive information. For TCP/22, only
+half-open probing is performed without establishing full connections. For
+UDP/161, SNMPv3 Get Requests are sent without any follow-up interaction.
 
 **Opt-out Mechanism:**
-We maintain a public web portal providing our research identity and contact
-information. This allows network administrators to opt out of our scanning
-scope. To date, we have received no complaints or opt-out requests.
+A public web portal provides research identity and contact information,
+allowing network administrators to opt out of the scanning scope. To date,
+no complaints or opt-out requests have been received.
 
 **Anonymity:**
-We do not publicly disclose raw IPv6 address details. We only report
-aggregated statistics and analysis results. The collected data is used
+Raw IPv6 address details are not publicly disclosed. Only aggregated
+statistics and analysis results are reported. The collected data is used
 solely for research purposes.
-
-**Disclosure:**
-We have communicated with the administrators of a campus network and
-addressed the identified firewall evasion issues. For other ASes where
-potential firewall vulnerabilities were observed, we are actively
-contacting the relevant network operators to inform them of the findings.
 
 # Measurement Caveats {#appendix-caveats}
 
@@ -1007,11 +1002,3 @@ The address dataset and measurement results are also available at the same
 location. Researchers can use 6Travel to reproduce these measurements or
 conduct similar studies over time to observe changes in the handling of
 packets with IPv6 Extension Headers.
-
-# Acknowledgments
-{:numbered="false"}
-
-We would like to thank Daguo Cheng, Chentian Wei, Zhaoan Wang, Kun Guo, and Chenyi Liu
-for their contributions to this work. We also thank the network
-administrators who cooperated with our disclosure efforts and the reviewers
-who provided valuable feedback on earlier versions of this document.
